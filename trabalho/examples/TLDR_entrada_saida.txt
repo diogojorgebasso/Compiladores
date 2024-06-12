@@ -1,0 +1,18 @@
+Na entrada e saída o programa deve ser capaz de identificar os seguintes casos:
+
+1. Atribuição de variáveis nos três tipos primitivos.
+
+int a = 5
+float b = -5.1
+float b = 5.1
+float b = +5.1
+str c = 'string'
+
+2. Saída com variável e string.
+
+print(a)
+print(b)
+print(c)
+print('arroz')
+print("feijao")
+

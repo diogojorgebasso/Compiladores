@@ -1,0 +1,11 @@
+Para as condicionais o código tem que ser capaz de reconhecer as seguintes estruturas:
+
+1. Somente um if.
+
+if(a>b){//codigo aqui}
+
+2. Um if e um else
+
+if(a<b){//codigo aqui} else{//codigo aqui}
+
+3. if(a<b and b>c or d!=j and mod b a == a ...){//codigo aqui}else{//}
