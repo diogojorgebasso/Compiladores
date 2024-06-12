@@ -79,5 +79,5 @@ while True:
     if not tok: 
         break      
     print(tok)
-    with open('entrada_saida.txt', 'a') as f:
+    with open('Trabalho_Pratico/lexico/entrada_saida.txt', 'a') as f:
       f.write(str(tok) + '\n')

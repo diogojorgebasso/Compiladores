@@ -31,14 +31,25 @@ tokens = (
    'MULTIPLICATION',
    'PLUS',
    'MINUS',
-   'MATHEQUALS'
+   'MATHEQUALS',
+   'COMMA',
+   'FOR',
+   'IN',
+   'RANGE',
+   'WHILE',
+   'TRUE',
 )
 
 reserved = {
    'int' : 'INT',
    'float' : 'FLOAT',
    'str' : 'STR',
-   'print' : 'PRINT'
+   'print' : 'PRINT',
+   'for':'FOR',
+   'in':'IN',
+   'range':'RANGE',
+   'while':'WHILE',
+   'True':'TRUE',
 }
 
 t_EQUALS    = r'='
@@ -55,10 +66,15 @@ t_DIVISION = r'/'
 t_MULTIPLICATION = r'\*'
 t_PLUS = r'\+'
 t_MINUS = r'-'
-t_AND = r'and'
 t_OR = r'or'
 t_MOD = r'mod'
 t_MATHEQUALS = r'=='
+t_FOR = r'for'
+t_IN = r'in'
+t_RANGE = r'range'
+t_WHILE = r'while'
+t_TRUE = r'True'
+t_COMMA = r','
 
 #CONDICIONAIS
 t_IF = r'if'
@@ -96,7 +112,7 @@ def t_ELSE(t):
     r'else'
     return t
 
-def t_ID(t):
+def t_ID(t): #tem que ser o último
     r'\w+'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
     return t
@@ -109,17 +125,18 @@ def t_error(t):
 
 lexer = lex.lex()
 
-lexer.input("""int a = 5
-            float b = -5.1
-            int c = 6
-            if(b==a and c>b){
-                print("a igual a b")
-            }
-            if(a>b){
-                print("a maior que b")
-            }else{
-                print("b maior que a")
-            }
+lexer.input("""for int a in range(1,10){
+                    print(a)
+                }
+                for int a in range(1, 10, 5){
+                    print(a)
+                }
+                while(True){
+                    print("a")
+                }
+                while(a==b){
+                    print("a igual a b")
+                }
             """)
 
 while True:
@@ -127,5 +144,5 @@ while True:
     if not tok: 
         break      
     print(tok)
-    with open('condicionais.txt', 'a') as f:
+    with open('Trabalho_Pratico/lexico/repeticao.txt', 'a') as f:
       f.write(str(tok) + '\n')
