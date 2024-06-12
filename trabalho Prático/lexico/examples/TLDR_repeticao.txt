@@ -1,0 +1,11 @@
+Para os comandos de repetição, precisa ser identificado os seguintes exemplos:
+
+1. Estrutura *for* com e sem o range 
+for a in range([numero inicio],[numero fim]){//codigo aqui}
+for _ in range([numero inicio],[numero fim], passo){//codigo aqui}
+for p in a{//codigo aqui}
+
+2. Estrutura *while*
+while(True){//codigo aqui}
+while(a<b){//codigo aqui}
+while(a<b and b>v...){//codigo aqui}
