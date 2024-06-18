@@ -5,32 +5,21 @@ import ply.lex as lex
 
 tokens = (
    'INT', 
-   'FLOAT',
-   'STR',
    'PRINT',
    'ID',
    'EQUALS',
    'NUMBER',
-   'FNUMBER',
    'STRING',
    'NEWLINE',
    'LPAREN',
    'RPAREN',
-   'IF',
-   'COMANDOCONDICIONAL',
-   'ELSE',
    'LBRACKET',
    'RBRACKET',
    'AND',
    'OR',
-   'MOD',
    'GT',
    'LT',
    'DIF',
-   'DIVISION',
-   'MULTIPLICATION',
-   'PLUS',
-   'MINUS',
    'MATHEQUALS',
    'COMMA',
    'FOR',
@@ -38,18 +27,19 @@ tokens = (
    'RANGE',
    'WHILE',
    'TRUE',
+   'FALSE',
+   'PLUS'
 )
 
 reserved = {
    'int' : 'INT',
    'float' : 'FLOAT',
-   'str' : 'STR',
    'print' : 'PRINT',
    'for':'FOR',
+   'or': 'OR',
    'in':'IN',
    'range':'RANGE',
-   'while':'WHILE',
-   'True':'TRUE',
+   'while':'WHILE'
 }
 
 t_EQUALS    = r'='
@@ -62,26 +52,16 @@ t_RBRACKET  = r'\}'
 t_GT = r'>'
 t_LT = r'<'
 t_DIF = r'!='
-t_DIVISION = r'/'
-t_MULTIPLICATION = r'\*'
-t_PLUS = r'\+'
-t_MINUS = r'-'
 t_OR = r'or'
-t_MOD = r'mod'
 t_MATHEQUALS = r'=='
 t_FOR = r'for'
 t_IN = r'in'
 t_RANGE = r'range'
 t_WHILE = r'while'
 t_TRUE = r'True'
+t_FALSE = r'False'
 t_COMMA = r','
-
-#CONDICIONAIS
-t_IF = r'if'
-
-def t_COMANDOCONDICIONAL(t):
-    r'if\((.*?)\)'
-    return t
+t_PLUS = r'\+'
 
 def t_NEWLINE(t):
     r'\n+'
@@ -108,10 +88,6 @@ def t_STRING(t):
     t.value = str(t.value[1:-1])  # remove single quotes
     return t
 
-def t_ELSE(t):
-    r'else'
-    return t
-
 def t_ID(t): #tem que ser o último
     r'\w+'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
@@ -134,7 +110,7 @@ lexer.input("""for int a in range(1,10){
                 while(True){
                     print("a")
                 }
-                while(a==b){
+                while(a==b or b>a){
                     print("a igual a b")
                 }
             """)

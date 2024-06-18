@@ -1,0 +1,960 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement NEWLINE
+Rule 3     statement_list -> statement_list statement NEWLINE
+Rule 4     statement -> for_statement
+Rule 5     statement -> while_statement
+Rule 6     statement -> print_statement
+Rule 7     statement -> assignment_statement
+Rule 8     assignment_statement -> ID EQUALS condition
+Rule 9     condition -> expression comparison_operator expression
+Rule 10    condition -> condition logical_operator condition
+Rule 11    condition -> TRUE
+Rule 12    condition -> FALSE
+Rule 13    comparison_operator -> LT
+Rule 14    comparison_operator -> GT
+Rule 15    comparison_operator -> PLUS
+Rule 16    comparison_operator -> MATHEQUALS
+Rule 17    comparison_operator -> DIF
+Rule 18    expression -> NUMBER
+Rule 19    expression -> STRING
+Rule 20    expression -> ID
+Rule 21    logical_operator -> AND
+Rule 22    logical_operator -> OR
+Rule 23    for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+Rule 24    for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+Rule 25    for_statement -> FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+Rule 26    while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+Rule 27    print_statement -> PRINT LPAREN expression RPAREN NEWLINE
+
+Terminals, with rules where they appear
+
+AND                  : 21
+COMMA                : 23 23 24
+DIF                  : 17
+EQUALS               : 8
+FALSE                : 12
+FOR                  : 23 24 25
+GT                   : 14
+ID                   : 8 20 23 24 25 25
+IN                   : 23 24 25
+INT                  : 23 24 25
+LBRACKET             : 23 24 25 26
+LPAREN               : 23 24 26 27
+LT                   : 13
+MATHEQUALS           : 16
+NEWLINE              : 2 3 23 23 24 24 25 26 26 27
+NUMBER               : 18 23 23 23 24 24
+OR                   : 22
+PLUS                 : 15
+PRINT                : 27
+RANGE                : 23 24
+RBRACKET             : 23 24 25 26
+RPAREN               : 23 24 26 27
+STRING               : 19
+TRUE                 : 11
+WHILE                : 26
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment_statement : 7
+comparison_operator  : 9
+condition            : 8 10 10 26
+expression           : 9 9 27
+for_statement        : 4
+logical_operator     : 10
+print_statement      : 6
+program              : 0
+statement            : 2 3
+statement_list       : 1 3 23 24 25 26
+while_statement      : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement NEWLINE
+    (3) statement_list -> . statement_list statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (3) statement_list -> statement_list . statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 12
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 3
+
+    (2) statement_list -> statement . NEWLINE
+
+    NEWLINE         shift and go to state 13
+
+
+state 4
+
+    (4) statement -> for_statement .
+
+    NEWLINE         reduce using rule 4 (statement -> for_statement .)
+
+
+state 5
+
+    (5) statement -> while_statement .
+
+    NEWLINE         reduce using rule 5 (statement -> while_statement .)
+
+
+state 6
+
+    (6) statement -> print_statement .
+
+    NEWLINE         reduce using rule 6 (statement -> print_statement .)
+
+
+state 7
+
+    (7) statement -> assignment_statement .
+
+    NEWLINE         reduce using rule 7 (statement -> assignment_statement .)
+
+
+state 8
+
+    (23) for_statement -> FOR . INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR . INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> FOR . INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+
+    INT             shift and go to state 14
+
+
+state 9
+
+    (8) assignment_statement -> ID . EQUALS condition
+
+    EQUALS          shift and go to state 15
+
+
+state 10
+
+    (26) while_statement -> WHILE . LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    LPAREN          shift and go to state 16
+
+
+state 11
+
+    (27) print_statement -> PRINT . LPAREN expression RPAREN NEWLINE
+
+    LPAREN          shift and go to state 17
+
+
+state 12
+
+    (3) statement_list -> statement_list statement . NEWLINE
+
+    NEWLINE         shift and go to state 18
+
+
+state 13
+
+    (2) statement_list -> statement NEWLINE .
+
+    FOR             reduce using rule 2 (statement_list -> statement NEWLINE .)
+    WHILE           reduce using rule 2 (statement_list -> statement NEWLINE .)
+    PRINT           reduce using rule 2 (statement_list -> statement NEWLINE .)
+    ID              reduce using rule 2 (statement_list -> statement NEWLINE .)
+    $end            reduce using rule 2 (statement_list -> statement NEWLINE .)
+    RBRACKET        reduce using rule 2 (statement_list -> statement NEWLINE .)
+
+
+state 14
+
+    (23) for_statement -> FOR INT . ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT . ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> FOR INT . ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+
+    ID              shift and go to state 19
+
+
+state 15
+
+    (8) assignment_statement -> ID EQUALS . condition
+    (9) condition -> . expression comparison_operator expression
+    (10) condition -> . condition logical_operator condition
+    (11) condition -> . TRUE
+    (12) condition -> . FALSE
+    (18) expression -> . NUMBER
+    (19) expression -> . STRING
+    (20) expression -> . ID
+
+    TRUE            shift and go to state 23
+    FALSE           shift and go to state 24
+    NUMBER          shift and go to state 25
+    STRING          shift and go to state 26
+    ID              shift and go to state 20
+
+    condition                      shift and go to state 21
+    expression                     shift and go to state 22
+
+state 16
+
+    (26) while_statement -> WHILE LPAREN . condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (9) condition -> . expression comparison_operator expression
+    (10) condition -> . condition logical_operator condition
+    (11) condition -> . TRUE
+    (12) condition -> . FALSE
+    (18) expression -> . NUMBER
+    (19) expression -> . STRING
+    (20) expression -> . ID
+
+    TRUE            shift and go to state 23
+    FALSE           shift and go to state 24
+    NUMBER          shift and go to state 25
+    STRING          shift and go to state 26
+    ID              shift and go to state 20
+
+    condition                      shift and go to state 27
+    expression                     shift and go to state 22
+
+state 17
+
+    (27) print_statement -> PRINT LPAREN . expression RPAREN NEWLINE
+    (18) expression -> . NUMBER
+    (19) expression -> . STRING
+    (20) expression -> . ID
+
+    NUMBER          shift and go to state 25
+    STRING          shift and go to state 26
+    ID              shift and go to state 20
+
+    expression                     shift and go to state 28
+
+state 18
+
+    (3) statement_list -> statement_list statement NEWLINE .
+
+    FOR             reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+    WHILE           reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+    PRINT           reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+    ID              reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+    RBRACKET        reduce using rule 3 (statement_list -> statement_list statement NEWLINE .)
+
+
+state 19
+
+    (23) for_statement -> FOR INT ID . IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID . IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> FOR INT ID . IN ID LBRACKET statement_list RBRACKET NEWLINE
+
+    IN              shift and go to state 29
+
+
+state 20
+
+    (20) expression -> ID .
+
+    LT              reduce using rule 20 (expression -> ID .)
+    GT              reduce using rule 20 (expression -> ID .)
+    PLUS            reduce using rule 20 (expression -> ID .)
+    MATHEQUALS      reduce using rule 20 (expression -> ID .)
+    DIF             reduce using rule 20 (expression -> ID .)
+    RPAREN          reduce using rule 20 (expression -> ID .)
+    AND             reduce using rule 20 (expression -> ID .)
+    OR              reduce using rule 20 (expression -> ID .)
+    NEWLINE         reduce using rule 20 (expression -> ID .)
+
+
+state 21
+
+    (8) assignment_statement -> ID EQUALS condition .
+    (10) condition -> condition . logical_operator condition
+    (21) logical_operator -> . AND
+    (22) logical_operator -> . OR
+
+    NEWLINE         reduce using rule 8 (assignment_statement -> ID EQUALS condition .)
+    AND             shift and go to state 31
+    OR              shift and go to state 32
+
+    logical_operator               shift and go to state 30
+
+state 22
+
+    (9) condition -> expression . comparison_operator expression
+    (13) comparison_operator -> . LT
+    (14) comparison_operator -> . GT
+    (15) comparison_operator -> . PLUS
+    (16) comparison_operator -> . MATHEQUALS
+    (17) comparison_operator -> . DIF
+
+    LT              shift and go to state 34
+    GT              shift and go to state 35
+    PLUS            shift and go to state 36
+    MATHEQUALS      shift and go to state 37
+    DIF             shift and go to state 38
+
+    comparison_operator            shift and go to state 33
+
+state 23
+
+    (11) condition -> TRUE .
+
+    AND             reduce using rule 11 (condition -> TRUE .)
+    OR              reduce using rule 11 (condition -> TRUE .)
+    NEWLINE         reduce using rule 11 (condition -> TRUE .)
+    RPAREN          reduce using rule 11 (condition -> TRUE .)
+
+
+state 24
+
+    (12) condition -> FALSE .
+
+    AND             reduce using rule 12 (condition -> FALSE .)
+    OR              reduce using rule 12 (condition -> FALSE .)
+    NEWLINE         reduce using rule 12 (condition -> FALSE .)
+    RPAREN          reduce using rule 12 (condition -> FALSE .)
+
+
+state 25
+
+    (18) expression -> NUMBER .
+
+    LT              reduce using rule 18 (expression -> NUMBER .)
+    GT              reduce using rule 18 (expression -> NUMBER .)
+    PLUS            reduce using rule 18 (expression -> NUMBER .)
+    MATHEQUALS      reduce using rule 18 (expression -> NUMBER .)
+    DIF             reduce using rule 18 (expression -> NUMBER .)
+    RPAREN          reduce using rule 18 (expression -> NUMBER .)
+    AND             reduce using rule 18 (expression -> NUMBER .)
+    OR              reduce using rule 18 (expression -> NUMBER .)
+    NEWLINE         reduce using rule 18 (expression -> NUMBER .)
+
+
+state 26
+
+    (19) expression -> STRING .
+
+    LT              reduce using rule 19 (expression -> STRING .)
+    GT              reduce using rule 19 (expression -> STRING .)
+    PLUS            reduce using rule 19 (expression -> STRING .)
+    MATHEQUALS      reduce using rule 19 (expression -> STRING .)
+    DIF             reduce using rule 19 (expression -> STRING .)
+    RPAREN          reduce using rule 19 (expression -> STRING .)
+    AND             reduce using rule 19 (expression -> STRING .)
+    OR              reduce using rule 19 (expression -> STRING .)
+    NEWLINE         reduce using rule 19 (expression -> STRING .)
+
+
+state 27
+
+    (26) while_statement -> WHILE LPAREN condition . RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (10) condition -> condition . logical_operator condition
+    (21) logical_operator -> . AND
+    (22) logical_operator -> . OR
+
+    RPAREN          shift and go to state 39
+    AND             shift and go to state 31
+    OR              shift and go to state 32
+
+    logical_operator               shift and go to state 30
+
+state 28
+
+    (27) print_statement -> PRINT LPAREN expression . RPAREN NEWLINE
+
+    RPAREN          shift and go to state 40
+
+
+state 29
+
+    (23) for_statement -> FOR INT ID IN . RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN . RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> FOR INT ID IN . ID LBRACKET statement_list RBRACKET NEWLINE
+
+    RANGE           shift and go to state 42
+    ID              shift and go to state 41
+
+
+state 30
+
+    (10) condition -> condition logical_operator . condition
+    (9) condition -> . expression comparison_operator expression
+    (10) condition -> . condition logical_operator condition
+    (11) condition -> . TRUE
+    (12) condition -> . FALSE
+    (18) expression -> . NUMBER
+    (19) expression -> . STRING
+    (20) expression -> . ID
+
+    TRUE            shift and go to state 23
+    FALSE           shift and go to state 24
+    NUMBER          shift and go to state 25
+    STRING          shift and go to state 26
+    ID              shift and go to state 20
+
+    condition                      shift and go to state 43
+    expression                     shift and go to state 22
+
+state 31
+
+    (21) logical_operator -> AND .
+
+    TRUE            reduce using rule 21 (logical_operator -> AND .)
+    FALSE           reduce using rule 21 (logical_operator -> AND .)
+    NUMBER          reduce using rule 21 (logical_operator -> AND .)
+    STRING          reduce using rule 21 (logical_operator -> AND .)
+    ID              reduce using rule 21 (logical_operator -> AND .)
+
+
+state 32
+
+    (22) logical_operator -> OR .
+
+    TRUE            reduce using rule 22 (logical_operator -> OR .)
+    FALSE           reduce using rule 22 (logical_operator -> OR .)
+    NUMBER          reduce using rule 22 (logical_operator -> OR .)
+    STRING          reduce using rule 22 (logical_operator -> OR .)
+    ID              reduce using rule 22 (logical_operator -> OR .)
+
+
+state 33
+
+    (9) condition -> expression comparison_operator . expression
+    (18) expression -> . NUMBER
+    (19) expression -> . STRING
+    (20) expression -> . ID
+
+    NUMBER          shift and go to state 25
+    STRING          shift and go to state 26
+    ID              shift and go to state 20
+
+    expression                     shift and go to state 44
+
+state 34
+
+    (13) comparison_operator -> LT .
+
+    NUMBER          reduce using rule 13 (comparison_operator -> LT .)
+    STRING          reduce using rule 13 (comparison_operator -> LT .)
+    ID              reduce using rule 13 (comparison_operator -> LT .)
+
+
+state 35
+
+    (14) comparison_operator -> GT .
+
+    NUMBER          reduce using rule 14 (comparison_operator -> GT .)
+    STRING          reduce using rule 14 (comparison_operator -> GT .)
+    ID              reduce using rule 14 (comparison_operator -> GT .)
+
+
+state 36
+
+    (15) comparison_operator -> PLUS .
+
+    NUMBER          reduce using rule 15 (comparison_operator -> PLUS .)
+    STRING          reduce using rule 15 (comparison_operator -> PLUS .)
+    ID              reduce using rule 15 (comparison_operator -> PLUS .)
+
+
+state 37
+
+    (16) comparison_operator -> MATHEQUALS .
+
+    NUMBER          reduce using rule 16 (comparison_operator -> MATHEQUALS .)
+    STRING          reduce using rule 16 (comparison_operator -> MATHEQUALS .)
+    ID              reduce using rule 16 (comparison_operator -> MATHEQUALS .)
+
+
+state 38
+
+    (17) comparison_operator -> DIF .
+
+    NUMBER          reduce using rule 17 (comparison_operator -> DIF .)
+    STRING          reduce using rule 17 (comparison_operator -> DIF .)
+    ID              reduce using rule 17 (comparison_operator -> DIF .)
+
+
+state 39
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN . LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    LBRACKET        shift and go to state 45
+
+
+state 40
+
+    (27) print_statement -> PRINT LPAREN expression RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 46
+
+
+state 41
+
+    (25) for_statement -> FOR INT ID IN ID . LBRACKET statement_list RBRACKET NEWLINE
+
+    LBRACKET        shift and go to state 47
+
+
+state 42
+
+    (23) for_statement -> FOR INT ID IN RANGE . LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN RANGE . LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    LPAREN          shift and go to state 48
+
+
+state 43
+
+    (10) condition -> condition logical_operator condition .
+    (10) condition -> condition . logical_operator condition
+    (21) logical_operator -> . AND
+    (22) logical_operator -> . OR
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    NEWLINE         reduce using rule 10 (condition -> condition logical_operator condition .)
+    RPAREN          reduce using rule 10 (condition -> condition logical_operator condition .)
+    AND             shift and go to state 31
+    OR              shift and go to state 32
+
+  ! AND             [ reduce using rule 10 (condition -> condition logical_operator condition .) ]
+  ! OR              [ reduce using rule 10 (condition -> condition logical_operator condition .) ]
+
+    logical_operator               shift and go to state 30
+
+state 44
+
+    (9) condition -> expression comparison_operator expression .
+
+    AND             reduce using rule 9 (condition -> expression comparison_operator expression .)
+    OR              reduce using rule 9 (condition -> expression comparison_operator expression .)
+    NEWLINE         reduce using rule 9 (condition -> expression comparison_operator expression .)
+    RPAREN          reduce using rule 9 (condition -> expression comparison_operator expression .)
+
+
+state 45
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN LBRACKET . NEWLINE statement_list RBRACKET NEWLINE
+
+    NEWLINE         shift and go to state 49
+
+
+state 46
+
+    (27) print_statement -> PRINT LPAREN expression RPAREN NEWLINE .
+
+    NEWLINE         reduce using rule 27 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
+
+
+state 47
+
+    (25) for_statement -> FOR INT ID IN ID LBRACKET . statement_list RBRACKET NEWLINE
+    (2) statement_list -> . statement NEWLINE
+    (3) statement_list -> . statement_list statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 50
+    statement                      shift and go to state 3
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 48
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN . NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN . NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    NUMBER          shift and go to state 51
+
+
+state 49
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE . statement_list RBRACKET NEWLINE
+    (2) statement_list -> . statement NEWLINE
+    (3) statement_list -> . statement_list statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 52
+    statement                      shift and go to state 3
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 50
+
+    (25) for_statement -> FOR INT ID IN ID LBRACKET statement_list . RBRACKET NEWLINE
+    (3) statement_list -> statement_list . statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    RBRACKET        shift and go to state 53
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 12
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 51
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER . COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER . COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    COMMA           shift and go to state 54
+
+
+state 52
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list . RBRACKET NEWLINE
+    (3) statement_list -> statement_list . statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    RBRACKET        shift and go to state 55
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 12
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 53
+
+    (25) for_statement -> FOR INT ID IN ID LBRACKET statement_list RBRACKET . NEWLINE
+
+    NEWLINE         shift and go to state 56
+
+
+state 54
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA . NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA . NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    NUMBER          shift and go to state 57
+
+
+state 55
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET . NEWLINE
+
+    NEWLINE         shift and go to state 58
+
+
+state 56
+
+    (25) for_statement -> FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE .
+
+    NEWLINE         reduce using rule 25 (for_statement -> FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE .)
+
+
+state 57
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER . COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER . RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    COMMA           shift and go to state 59
+    RPAREN          shift and go to state 60
+
+
+state 58
+
+    (26) while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .
+
+    NEWLINE         reduce using rule 26 (while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .)
+
+
+state 59
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA . NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    NUMBER          shift and go to state 61
+
+
+state 60
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN . LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    LBRACKET        shift and go to state 62
+
+
+state 61
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER . RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    RPAREN          shift and go to state 63
+
+
+state 62
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET . NEWLINE statement_list RBRACKET NEWLINE
+
+    NEWLINE         shift and go to state 64
+
+
+state 63
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN . LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+
+    LBRACKET        shift and go to state 65
+
+
+state 64
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE . statement_list RBRACKET NEWLINE
+    (2) statement_list -> . statement NEWLINE
+    (3) statement_list -> . statement_list statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 66
+    statement                      shift and go to state 3
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 65
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET . NEWLINE statement_list RBRACKET NEWLINE
+
+    NEWLINE         shift and go to state 67
+
+
+state 66
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list . RBRACKET NEWLINE
+    (3) statement_list -> statement_list . statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    RBRACKET        shift and go to state 68
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 12
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 67
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE . statement_list RBRACKET NEWLINE
+    (2) statement_list -> . statement NEWLINE
+    (3) statement_list -> . statement_list statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement_list                 shift and go to state 69
+    statement                      shift and go to state 3
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 68
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET . NEWLINE
+
+    NEWLINE         shift and go to state 70
+
+
+state 69
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list . RBRACKET NEWLINE
+    (3) statement_list -> statement_list . statement NEWLINE
+    (4) statement -> . for_statement
+    (5) statement -> . while_statement
+    (6) statement -> . print_statement
+    (7) statement -> . assignment_statement
+    (23) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (24) for_statement -> . FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (25) for_statement -> . FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE
+    (26) while_statement -> . WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+    (27) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (8) assignment_statement -> . ID EQUALS condition
+
+    RBRACKET        shift and go to state 71
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 10
+    PRINT           shift and go to state 11
+    ID              shift and go to state 9
+
+    statement                      shift and go to state 12
+    for_statement                  shift and go to state 4
+    while_statement                shift and go to state 5
+    print_statement                shift and go to state 6
+    assignment_statement           shift and go to state 7
+
+state 70
+
+    (24) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .
+
+    NEWLINE         reduce using rule 24 (for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .)
+
+
+state 71
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET . NEWLINE
+
+    NEWLINE         shift and go to state 72
+
+
+state 72
+
+    (23) for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .
+
+    NEWLINE         reduce using rule 23 (for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 43 resolved as shift
+WARNING: shift/reduce conflict for OR in state 43 resolved as shift

@@ -1,0 +1,91 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMA
+    FALSE
+    FOR
+    IN
+    PLUS
+    RANGE
+    TRUE
+    WHILE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement statement_list
+Rule 4     statement -> declaration
+Rule 5     statement -> assignment
+Rule 6     statement -> print_statement
+Rule 7     statement -> conditional_statement
+Rule 8     declaration -> type ID EQUALS expression NEWLINE
+Rule 9     assignment -> ID EQUALS expression NEWLINE
+Rule 10    print_statement -> PRINT LPAREN expression RPAREN NEWLINE
+Rule 11    conditional_statement -> IF LPAREN condition RPAREN LBRACKET statement_list RBRACKET
+Rule 12    conditional_statement -> IF LPAREN condition RPAREN LBRACKET statement_list RBRACKET ELSE LBRACKET statement_list RBRACKET
+Rule 13    condition -> expression comparator expression
+Rule 14    condition -> expression comparator expression AND condition
+Rule 15    condition -> expression comparator expression OR condition
+Rule 16    comparator -> GT
+Rule 17    comparator -> LT
+Rule 18    comparator -> DIF
+Rule 19    comparator -> MATHEQUALS
+Rule 20    type -> INT
+Rule 21    type -> FLOAT
+Rule 22    type -> STR
+Rule 23    expression -> NUMBER
+Rule 24    expression -> FNUMBER
+Rule 25    expression -> STRING
+Rule 26    expression -> ID
+
+Terminals, with rules where they appear
+
+AND                  : 14
+COMMA                : 
+DIF                  : 18
+EQUALS               : 8 9
+FALSE                : 
+FOR                  : 
+GT                   : 16
+ID                   : 8 9 26
+IN                   : 
+INT                  : 20
+LBRACKET             : 11 12 12
+LPAREN               : 10 11 12
+LT                   : 17
+MATHEQUALS           : 19
+NEWLINE              : 8 9 10
+NUMBER               : 23
+OR                   : 15
+PLUS                 : 
+PRINT                : 10
+RANGE                : 
+RBRACKET             : 11 12 12
+RPAREN               : 10 11 12
+STRING               : 25
+TRUE                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+ELSE                 : 12
+FLOAT                : 21
+FNUMBER              : 24
+IF                   : 11 12
+STR                  : 22
+assignment           : 5
+comparator           : 13 14 15
+condition            : 11 12 14 15
+conditional_statement : 7
+declaration          : 4
+expression           : 8 9 10 13 13 14 14 15 15
+print_statement      : 6
+program              : 0
+statement            : 2 3
+statement_list       : 1 3 11 12 12
+type                 : 8
+

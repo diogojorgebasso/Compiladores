@@ -6,19 +6,14 @@ import ply.lex as lex
 tokens = (
    'INT', 
    'FLOAT',
-   'STR',
    'PRINT',
    'ID',
    'EQUALS',
    'NUMBER',
    'FNUMBER',
-   'STRING',
    'NEWLINE',
    'LPAREN',
    'RPAREN',
-   'IF',
-   'COMANDOCONDICIONAL',
-   'ELSE',
    'LBRACKET',
    'RBRACKET',
    'AND',
@@ -32,13 +27,17 @@ tokens = (
    'PLUS',
    'MINUS',
    'MATHEQUALS',
+   'FOR',
+   'IN',
+   'RANGE',
+   'WHILE',
    'TRUE',
+   'COMMA',
 )
 
 reserved = {
    'int' : 'INT',
    'float' : 'FLOAT',
-   'str' : 'STR',
    'print' : 'PRINT'
 }
 
@@ -60,13 +59,6 @@ t_AND = r'and'
 t_OR = r'or'
 t_MOD = r'mod'
 t_MATHEQUALS = r'=='
-
-#CONDICIONAIS
-t_IF = r'if'
-
-def t_COMANDOCONDICIONAL(t):
-    r'if\((.*?)\)'
-    return t
 
 def t_NEWLINE(t):
     r'\n+'
@@ -93,10 +85,6 @@ def t_STRING(t):
     t.value = str(t.value[1:-1])  # remove single quotes
     return t
 
-def t_ELSE(t):
-    r'else'
-    return t
-
 def t_ID(t): #tem que ser o último
     r'\w+'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
@@ -113,14 +101,12 @@ lexer = lex.lex()
 lexer.input("""int a = 5
             float b = -5.1
             int c = 6
-            if(b==a and c>b){
-                print("a igual a b")
-            }
-            if(a>b){
-                print("a maior que b")
-            }else{
-                print("b maior que a")
-            }
+            print(a+b)
+            print(a-b)
+            print(a*b)
+            print(a/b)
+            print(mod(a, b))
+
             """)
 
 while True:
@@ -128,7 +114,7 @@ while True:
     if not tok: 
         break      
     print(tok)
-    with open('Trabalho_Pratico/lexico/condicionais.txt', 'a') as f:
+    with open('Trabalho_Pratico/lexico/math.txt', 'a') as f:
       f.write(str(tok) + '\n')
 
 
