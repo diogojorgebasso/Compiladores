@@ -1,9 +1,2 @@
-a = 5
-b = -5.1
-c = 6
-if b == a and c > b:
-    print("a igual a b")
-if a > b:
-    print("a maior que b")
-else:
-    print("b maior que a")
+while(d > b and a != b):
+    

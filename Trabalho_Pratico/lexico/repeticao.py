@@ -39,7 +39,8 @@ reserved = {
    'or': 'OR',
    'in':'IN',
    'range':'RANGE',
-   'while':'WHILE'
+   'while':'WHILE',
+   'True':'TRUE',
 }
 
 t_EQUALS    = r'='
@@ -85,7 +86,7 @@ def t_FNUMBER(t):
 
 def t_STRING(t):
     r'\".*?\"|\'.*?\''
-    t.value = str(t.value[1:-1])  # remove single quotes
+    t.value = str(t.value) 
     return t
 
 def t_ID(t): #tem que ser o último
@@ -101,8 +102,9 @@ def t_error(t):
 
 lexer = lex.lex()
 
-lexer.input("""for int a in range(1,10){
-                    print(a)
+lexer.input("""int b
+            for int a in range(1,10){
+                    b = b+a
                 }
                 for int a in range(1, 10, 5){
                     print(a)

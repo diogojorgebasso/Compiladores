@@ -1,0 +1,4 @@
+while(True):
+    print("Hello World")
+while(d > b and a != b):
+    print(a)

@@ -11,8 +11,8 @@ def p_program(p):
     p[0] = p[1]
 
 def p_statement_list(p):
-    '''statement_list : statement NEWLINE
-                      | statement_list statement NEWLINE'''
+    '''statement_list : statement 
+                      | statement_list statement'''
     if len(p) == 2:
         p[0] = [p[1]]
     else:
@@ -26,18 +26,16 @@ def p_statement(p):
     p[0] = p[1]
 
 def p_assignment_statement(p):
-    '''assignment_statement : ID EQUALS condition'''
-    p[0] = ('assign', p[1], p[3])
+    '''assignment_statement : ID EQUALS condition NEWLINE'''
+    p[0] = f"{p[1]} = {p[3]}"
 
+#ATTENTION --
 def p_condition(p):
     '''condition : expression comparison_operator expression
                  | condition logical_operator condition
-                 | TRUE
-                 | FALSE'''
+                 | ID comparison_operator ID'''
     if len(p) == 4:
-        p[0] = (p[2], p[1], p[3])
-    elif len(p) == 5:
-        p[0] = (p[2], p[1], p[3], p[4])
+        p[0] = f"{p[1]} {p[2]} {p[3]}"
     else:
         p[0] = p[1]
 
@@ -63,28 +61,31 @@ def p_logical_operator(p):
 
 def p_for_statement(p):
     '''for_statement : FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
-              | FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
-              | FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE'''
-    if len(p) == 15:  # for int a in range(1,2,3)
-        p[0] = ('for', p[3], p[7], p[9], p[11], p[13])
-    elif len(p) == 13:  # for int b in range(1,2)
-        p[0] = ('for', p[3], p[7], p[9], None, p[11])
-    else:  # for int a in b
-        p[0] = ('for', p[3], p[5], None, None, p[7])
+                     | FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE assignment_statement RBRACKET NEWLINE
+                     | FOR INT ID LBRACKET NEWLINE statement_list RBRACKET NEWLINE'''
+    if len(p) == 18:
+        p[0] = f"for {p[3]} in range({p[7]}, {p[9]}, {p[11]}):\n{indent(p[15])}"
+    elif len(p) == 16:
+        p[0] = f"for {p[3]} in range({p[7]}, {p[9]}):\n{indent(p[13])}"
+    else:
+        p[0] = f"for {p[3]} in {p[5]}:\n{indent(p[6])}"
 
 def p_while_statement(p):
-    '''while_statement : WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE'''
-    p[0] = ('while', p[3], p[6])
+    '''while_statement : WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE
+                       | WHILE LPAREN TRUE RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE'''
+    p[0] = f"while({p[3]}):\n{indent(p[7])}"
 
 def p_print_statement(p):
     '''print_statement : PRINT LPAREN ID RPAREN NEWLINE
                        | PRINT LPAREN STRING RPAREN NEWLINE'''
-    p[0] = ('print', p[3])
+    p[0] = f'print({p[3]})\n'
 
 def indent(code_block, level=1):
     indentation = '    '  # 4 spaces
     if isinstance(code_block, list):
         code_block = "\n".join(code_block)
+    else:  # Handle other types gracefully
+        code_block = str(code_block)
     indented_code = ''.join(f"{indentation*level}{line}\n" for line in code_block.splitlines())
     return indented_code
 
@@ -99,17 +100,24 @@ def p_error(p):
 parser = yacc.yacc()
 
 # Test it out
-data = '''for int a in range(1, 10){ 
-            b = b + a
-          }
-          while(True){
-            print("Hello World")
-          }
-          while(d>b and a!=b){ 
-            print(a) 
-          }
-          '''
+data = '''for int a in range(1,10){ 
+    a = a*2
+}
+while(True){
+    print("Hello World")
+}
+while(d>b and a!=b){ 
+    print(a) 
+}
+'''
 
 result = parser.parse(data)
+code_to_execute = ''.join(result)
+print(code_to_execute)
+# escrevendo para um arquivo específico
+with open('Trabalho_Pratico/sintatico/repeticao/output.txt', 'w') as file:
+    file.write(code_to_execute)
 
-print(result)
+print("Compilado com sucesso!")
+#executando o código no próprio script    
+exec(code_to_execute)

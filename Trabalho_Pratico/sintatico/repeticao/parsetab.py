@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND COMMA DIF EQUALS FALSE FOR GT ID IN INT LBRACKET LPAREN LT MATHEQUALS NEWLINE NUMBER OR PLUS PRINT RANGE RBRACKET RPAREN STRING TRUE WHILEprogram : statement_liststatement_list : statement NEWLINE\n                      | statement_list statement NEWLINEstatement : for_statement\n                 | while_statement\n                 | print_statement\n                 | assignment_statementassignment_statement : ID EQUALS conditioncondition : expression comparison_operator expression\n                 | condition logical_operator condition\n                 | TRUE\n                 | FALSEcomparison_operator : LT\n                           | GT\n                           | PLUS\n                           | MATHEQUALS\n                           | DIFexpression : NUMBER\n                  | STRING\n                  | IDlogical_operator : AND\n                        | ORfor_statement : FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE\n              | FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE\n              | FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINEwhile_statement : WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINEprint_statement : PRINT LPAREN expression RPAREN NEWLINE'
+_lr_signature = 'AND COMMA DIF EQUALS FALSE FOR GT ID IN INT LBRACKET LPAREN LT MATHEQUALS NEWLINE NUMBER OR PLUS PRINT RANGE RBRACKET RPAREN STRING TRUE WHILEprogram : statement_liststatement_list : statement \n                      | statement_list statementstatement : for_statement\n                 | while_statement\n                 | print_statement\n                 | assignment_statementassignment_statement : ID EQUALS condition NEWLINEcondition : expression comparison_operator expression\n                 | condition logical_operator condition\n                 | ID comparison_operator IDcomparison_operator : LT\n                           | GT\n                           | PLUS\n                           | MATHEQUALS\n                           | DIFexpression : NUMBER\n                  | STRING\n                  | IDlogical_operator : AND\n                        | ORfor_statement : FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE\n                     | FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE assignment_statement RBRACKET NEWLINE\n                     | FOR INT ID LBRACKET NEWLINE statement_list RBRACKET NEWLINEwhile_statement : WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE\n                       | WHILE LPAREN TRUE RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINEprint_statement : PRINT LPAREN ID RPAREN NEWLINE\n                       | PRINT LPAREN STRING RPAREN NEWLINE'
     
-_lr_action_items = {'FOR':([0,2,13,18,47,49,50,52,64,66,67,69,],[8,8,-2,-3,8,8,8,8,8,8,8,8,]),'WHILE':([0,2,13,18,47,49,50,52,64,66,67,69,],[10,10,-2,-3,10,10,10,10,10,10,10,10,]),'PRINT':([0,2,13,18,47,49,50,52,64,66,67,69,],[11,11,-2,-3,11,11,11,11,11,11,11,11,]),'ID':([0,2,13,14,15,16,17,18,29,30,31,32,33,34,35,36,37,38,47,49,50,52,64,66,67,69,],[9,9,-2,19,20,20,20,-3,41,20,-21,-22,20,-13,-14,-15,-16,-17,9,9,9,9,9,9,9,9,]),'$end':([1,2,13,18,],[0,-1,-2,-3,]),'NEWLINE':([3,4,5,6,7,12,20,21,23,24,25,26,40,43,44,45,46,53,55,56,58,62,65,68,70,71,72,],[13,-4,-5,-6,-7,18,-20,-8,-11,-12,-18,-19,46,-10,-9,49,-27,56,58,-25,-26,64,67,70,-24,72,-23,]),'INT':([8,],[14,]),'EQUALS':([9,],[15,]),'LPAREN':([10,11,42,],[16,17,48,]),'RBRACKET':([13,18,50,52,66,69,],[-2,-3,53,55,68,71,]),'TRUE':([15,16,30,31,32,],[23,23,23,-21,-22,]),'FALSE':([15,16,30,31,32,],[24,24,24,-21,-22,]),'NUMBER':([15,16,17,30,31,32,33,34,35,36,37,38,48,54,59,],[25,25,25,25,-21,-22,25,-13,-14,-15,-16,-17,51,57,61,]),'STRING':([15,16,17,30,31,32,33,34,35,36,37,38,],[26,26,26,26,-21,-22,26,-13,-14,-15,-16,-17,]),'IN':([19,],[29,]),'LT':([20,22,25,26,],[-20,34,-18,-19,]),'GT':([20,22,25,26,],[-20,35,-18,-19,]),'PLUS':([20,22,25,26,],[-20,36,-18,-19,]),'MATHEQUALS':([20,22,25,26,],[-20,37,-18,-19,]),'DIF':([20,22,25,26,],[-20,38,-18,-19,]),'RPAREN':([20,23,24,25,26,27,28,43,44,57,61,],[-20,-11,-12,-18,-19,39,40,-10,-9,60,63,]),'AND':([20,21,23,24,25,26,27,43,44,],[-20,31,-11,-12,-18,-19,31,31,-9,]),'OR':([20,21,23,24,25,26,27,43,44,],[-20,32,-11,-12,-18,-19,32,32,-9,]),'RANGE':([29,],[42,]),'LBRACKET':([39,41,60,63,],[45,47,62,65,]),'COMMA':([51,57,],[54,59,]),}
+_lr_action_items = {'FOR':([0,2,3,4,5,6,7,12,35,45,52,53,55,56,57,60,61,63,67,68,77,79,80,82,],[8,8,-2,-4,-5,-6,-7,-3,-8,8,-27,-28,8,8,8,8,8,-24,-25,-26,8,8,-23,-22,]),'WHILE':([0,2,3,4,5,6,7,12,35,45,52,53,55,56,57,60,61,63,67,68,77,79,80,82,],[10,10,-2,-4,-5,-6,-7,-3,-8,10,-27,-28,10,10,10,10,10,-24,-25,-26,10,10,-23,-22,]),'PRINT':([0,2,3,4,5,6,7,12,35,45,52,53,55,56,57,60,61,63,67,68,77,79,80,82,],[11,11,-2,-4,-5,-6,-7,-3,-8,11,-27,-28,11,11,11,11,11,-24,-25,-26,11,11,-23,-22,]),'ID':([0,2,3,4,5,6,7,12,13,14,15,16,29,30,31,32,33,34,35,36,37,38,39,45,52,53,55,56,57,60,61,63,67,68,74,77,79,80,82,],[9,9,-2,-4,-5,-6,-7,-3,17,18,18,25,46,-12,-13,-14,-15,-16,-8,18,-20,-21,49,9,-27,-28,9,9,9,9,9,-24,-25,-26,9,9,9,-23,-22,]),'$end':([1,2,3,4,5,6,7,12,35,52,53,63,67,68,80,82,],[0,-1,-2,-4,-5,-6,-7,-3,-8,-27,-28,-24,-25,-26,-23,-22,]),'RBRACKET':([3,4,5,6,7,12,35,52,53,55,60,61,63,67,68,76,79,80,82,],[-2,-4,-5,-6,-7,-3,-8,-27,-28,59,64,65,-24,-25,-26,78,81,-23,-22,]),'INT':([8,],[13,]),'EQUALS':([9,],[14,]),'LPAREN':([10,11,44,],[15,16,54,]),'NUMBER':([14,15,30,31,32,33,34,36,37,38,39,54,62,69,],[21,21,-12,-13,-14,-15,-16,21,-20,-21,21,58,66,71,]),'STRING':([14,15,16,30,31,32,33,34,36,37,38,39,],[22,22,26,-12,-13,-14,-15,-16,22,-20,-21,22,]),'TRUE':([15,],[24,]),'IN':([17,],[27,]),'LBRACKET':([17,40,41,70,73,],[28,50,51,72,75,]),'LT':([18,20,21,22,],[30,30,-17,-18,]),'GT':([18,20,21,22,],[31,31,-17,-18,]),'PLUS':([18,20,21,22,],[32,32,-17,-18,]),'MATHEQUALS':([18,20,21,22,],[33,33,-17,-18,]),'DIF':([18,20,21,22,],[34,34,-17,-18,]),'NEWLINE':([19,21,22,28,42,43,46,47,48,49,50,51,59,64,65,72,75,78,81,],[35,-17,-18,45,52,53,-11,-10,-9,-19,56,57,63,67,68,74,77,80,82,]),'AND':([19,21,22,23,46,47,48,49,],[37,-17,-18,37,-11,37,-9,-19,]),'OR':([19,21,22,23,46,47,48,49,],[38,-17,-18,38,-11,38,-9,-19,]),'RPAREN':([21,22,23,24,25,26,46,47,48,49,66,71,],[-17,-18,40,41,42,43,-11,-10,-9,-19,70,73,]),'RANGE':([27,],[44,]),'COMMA':([58,66,],[62,69,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,47,49,64,67,],[2,50,52,66,69,]),'statement':([0,2,47,49,50,52,64,66,67,69,],[3,12,3,3,12,12,3,12,3,12,]),'for_statement':([0,2,47,49,50,52,64,66,67,69,],[4,4,4,4,4,4,4,4,4,4,]),'while_statement':([0,2,47,49,50,52,64,66,67,69,],[5,5,5,5,5,5,5,5,5,5,]),'print_statement':([0,2,47,49,50,52,64,66,67,69,],[6,6,6,6,6,6,6,6,6,6,]),'assignment_statement':([0,2,47,49,50,52,64,66,67,69,],[7,7,7,7,7,7,7,7,7,7,]),'condition':([15,16,30,],[21,27,43,]),'expression':([15,16,17,30,33,],[22,22,28,22,44,]),'logical_operator':([21,27,43,],[30,30,30,]),'comparison_operator':([22,],[33,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,45,56,57,77,],[2,55,60,61,79,]),'statement':([0,2,45,55,56,57,60,61,77,79,],[3,12,3,12,3,3,12,12,3,12,]),'for_statement':([0,2,45,55,56,57,60,61,77,79,],[4,4,4,4,4,4,4,4,4,4,]),'while_statement':([0,2,45,55,56,57,60,61,77,79,],[5,5,5,5,5,5,5,5,5,5,]),'print_statement':([0,2,45,55,56,57,60,61,77,79,],[6,6,6,6,6,6,6,6,6,6,]),'assignment_statement':([0,2,45,55,56,57,60,61,74,77,79,],[7,7,7,7,7,7,7,7,76,7,7,]),'condition':([14,15,36,],[19,23,47,]),'expression':([14,15,36,39,],[20,20,20,48,]),'comparison_operator':([18,20,],[29,39,]),'logical_operator':([19,23,47,],[36,36,36,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,30 +28,31 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
   ('program -> statement_list','program',1,'p_program','repeticao.py',10),
-  ('statement_list -> statement NEWLINE','statement_list',2,'p_statement_list','repeticao.py',14),
-  ('statement_list -> statement_list statement NEWLINE','statement_list',3,'p_statement_list','repeticao.py',15),
-  ('statement -> for_statement','statement',1,'p_statement','repeticao.py',22),
-  ('statement -> while_statement','statement',1,'p_statement','repeticao.py',23),
-  ('statement -> print_statement','statement',1,'p_statement','repeticao.py',24),
-  ('statement -> assignment_statement','statement',1,'p_statement','repeticao.py',25),
-  ('assignment_statement -> ID EQUALS condition','assignment_statement',3,'p_assignment_statement','repeticao.py',29),
-  ('condition -> expression comparison_operator expression','condition',3,'p_condition','repeticao.py',33),
-  ('condition -> condition logical_operator condition','condition',3,'p_condition','repeticao.py',34),
-  ('condition -> TRUE','condition',1,'p_condition','repeticao.py',35),
-  ('condition -> FALSE','condition',1,'p_condition','repeticao.py',36),
-  ('comparison_operator -> LT','comparison_operator',1,'p_comparison_operator','repeticao.py',45),
-  ('comparison_operator -> GT','comparison_operator',1,'p_comparison_operator','repeticao.py',46),
-  ('comparison_operator -> PLUS','comparison_operator',1,'p_comparison_operator','repeticao.py',47),
-  ('comparison_operator -> MATHEQUALS','comparison_operator',1,'p_comparison_operator','repeticao.py',48),
-  ('comparison_operator -> DIF','comparison_operator',1,'p_comparison_operator','repeticao.py',49),
-  ('expression -> NUMBER','expression',1,'p_expression','repeticao.py',53),
-  ('expression -> STRING','expression',1,'p_expression','repeticao.py',54),
-  ('expression -> ID','expression',1,'p_expression','repeticao.py',55),
-  ('logical_operator -> AND','logical_operator',1,'p_logical_operator','repeticao.py',59),
-  ('logical_operator -> OR','logical_operator',1,'p_logical_operator','repeticao.py',60),
-  ('for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','for_statement',17,'p_for_statement','repeticao.py',65),
-  ('for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','for_statement',15,'p_for_statement','repeticao.py',66),
-  ('for_statement -> FOR INT ID IN ID LBRACKET statement_list RBRACKET NEWLINE','for_statement',9,'p_for_statement','repeticao.py',67),
-  ('while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','while_statement',9,'p_while_statement','repeticao.py',76),
-  ('print_statement -> PRINT LPAREN expression RPAREN NEWLINE','print_statement',5,'p_print_statement','repeticao.py',80),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','repeticao.py',14),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','repeticao.py',15),
+  ('statement -> for_statement','statement',1,'p_statement','repeticao.py',23),
+  ('statement -> while_statement','statement',1,'p_statement','repeticao.py',24),
+  ('statement -> print_statement','statement',1,'p_statement','repeticao.py',25),
+  ('statement -> assignment_statement','statement',1,'p_statement','repeticao.py',26),
+  ('assignment_statement -> ID EQUALS condition NEWLINE','assignment_statement',4,'p_assignment_statement','repeticao.py',31),
+  ('condition -> expression comparison_operator expression','condition',3,'p_condition','repeticao.py',37),
+  ('condition -> condition logical_operator condition','condition',3,'p_condition','repeticao.py',38),
+  ('condition -> ID comparison_operator ID','condition',3,'p_condition','repeticao.py',39),
+  ('comparison_operator -> LT','comparison_operator',1,'p_comparison_operator','repeticao.py',47),
+  ('comparison_operator -> GT','comparison_operator',1,'p_comparison_operator','repeticao.py',48),
+  ('comparison_operator -> PLUS','comparison_operator',1,'p_comparison_operator','repeticao.py',49),
+  ('comparison_operator -> MATHEQUALS','comparison_operator',1,'p_comparison_operator','repeticao.py',50),
+  ('comparison_operator -> DIF','comparison_operator',1,'p_comparison_operator','repeticao.py',51),
+  ('expression -> NUMBER','expression',1,'p_expression','repeticao.py',55),
+  ('expression -> STRING','expression',1,'p_expression','repeticao.py',56),
+  ('expression -> ID','expression',1,'p_expression','repeticao.py',57),
+  ('logical_operator -> AND','logical_operator',1,'p_logical_operator','repeticao.py',61),
+  ('logical_operator -> OR','logical_operator',1,'p_logical_operator','repeticao.py',62),
+  ('for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','for_statement',17,'p_for_statement','repeticao.py',67),
+  ('for_statement -> FOR INT ID IN RANGE LPAREN NUMBER COMMA NUMBER RPAREN LBRACKET NEWLINE assignment_statement RBRACKET NEWLINE','for_statement',15,'p_for_statement','repeticao.py',68),
+  ('for_statement -> FOR INT ID LBRACKET NEWLINE statement_list RBRACKET NEWLINE','for_statement',8,'p_for_statement','repeticao.py',69),
+  ('while_statement -> WHILE LPAREN condition RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','while_statement',9,'p_while_statement','repeticao.py',78),
+  ('while_statement -> WHILE LPAREN TRUE RPAREN LBRACKET NEWLINE statement_list RBRACKET NEWLINE','while_statement',9,'p_while_statement','repeticao.py',79),
+  ('print_statement -> PRINT LPAREN ID RPAREN NEWLINE','print_statement',5,'p_print_statement','repeticao.py',83),
+  ('print_statement -> PRINT LPAREN STRING RPAREN NEWLINE','print_statement',5,'p_print_statement','repeticao.py',84),
 ]
