@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'EQUALS FLOAT FNUMBER ID INT LPAREN NEWLINE NUMBER PRINT RPAREN STR STRINGprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : declaration\n                 | print_statementdeclaration : type ID EQUALS expression NEWLINEprint_statement : PRINT LPAREN ID RPAREN NEWLINE\n                       | PRINT LPAREN STRING RPAREN NEWLINEtype : INT\n            | FLOAT\n            | STRexpression : NUMBER\n                  | FNUMBER\n                  | STRING\n                  | ID'
+_lr_signature = 'EQUALS FLOAT FNUMBER ID INPUT INT LPAREN NEWLINE NUMBER PRINT RPAREN STR STRINGprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : declaration\n                 | print_statementdeclaration : type ID EQUALS expression NEWLINEprint_statement : PRINT LPAREN ID RPAREN NEWLINE\n                       | PRINT LPAREN STRING RPAREN NEWLINEtype : INT\n            | FLOAT\n            | STRexpression : NUMBER\n                  | FNUMBER\n                  | STRING\n                  | ID\n                  | input_callinput_call : INPUT LPAREN RPAREN\n                  | INPUT LPAREN STRING RPAREN'
     
-_lr_action_items = {'PRINT':([0,2,3,4,5,11,24,25,26,],[7,7,-2,-4,-5,-3,-6,-7,-8,]),'INT':([0,2,3,4,5,11,24,25,26,],[8,8,-2,-4,-5,-3,-6,-7,-8,]),'FLOAT':([0,2,3,4,5,11,24,25,26,],[9,9,-2,-4,-5,-3,-6,-7,-8,]),'STR':([0,2,3,4,5,11,24,25,26,],[10,10,-2,-4,-5,-3,-6,-7,-8,]),'$end':([1,2,3,4,5,11,24,25,26,],[0,-1,-2,-4,-5,-3,-6,-7,-8,]),'ID':([6,8,9,10,13,14,],[12,-9,-10,-11,15,17,]),'LPAREN':([7,],[13,]),'EQUALS':([12,],[14,]),'STRING':([13,14,],[16,21,]),'NUMBER':([14,],[19,]),'FNUMBER':([14,],[20,]),'RPAREN':([15,16,],[22,23,]),'NEWLINE':([17,18,19,20,21,22,23,],[-15,24,-12,-13,-14,25,26,]),}
+_lr_action_items = {'PRINT':([0,2,3,4,5,11,26,28,29,],[7,7,-2,-4,-5,-3,-6,-7,-8,]),'INT':([0,2,3,4,5,11,26,28,29,],[8,8,-2,-4,-5,-3,-6,-7,-8,]),'FLOAT':([0,2,3,4,5,11,26,28,29,],[9,9,-2,-4,-5,-3,-6,-7,-8,]),'STR':([0,2,3,4,5,11,26,28,29,],[10,10,-2,-4,-5,-3,-6,-7,-8,]),'$end':([1,2,3,4,5,11,26,28,29,],[0,-1,-2,-4,-5,-3,-6,-7,-8,]),'ID':([6,8,9,10,13,14,],[12,-9,-10,-11,15,17,]),'LPAREN':([7,23,],[13,27,]),'EQUALS':([12,],[14,]),'STRING':([13,14,27,],[16,21,31,]),'NUMBER':([14,],[19,]),'FNUMBER':([14,],[20,]),'INPUT':([14,],[23,]),'RPAREN':([15,16,27,31,],[24,25,30,32,]),'NEWLINE':([17,18,19,20,21,22,24,25,30,32,],[-15,26,-12,-13,-14,-16,28,29,-17,-18,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,11,]),'declaration':([0,2,],[4,4,]),'print_statement':([0,2,],[5,5,]),'type':([0,2,],[6,6,]),'expression':([14,],[18,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,11,]),'declaration':([0,2,],[4,4,]),'print_statement':([0,2,],[5,5,]),'type':([0,2,],[6,6,]),'expression':([14,],[18,]),'input_call':([14,],[22,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -35,11 +35,14 @@ _lr_productions = [
   ('declaration -> type ID EQUALS expression NEWLINE','declaration',5,'p_declaration','entrada_saida.py',26),
   ('print_statement -> PRINT LPAREN ID RPAREN NEWLINE','print_statement',5,'p_print_statement','entrada_saida.py',30),
   ('print_statement -> PRINT LPAREN STRING RPAREN NEWLINE','print_statement',5,'p_print_statement','entrada_saida.py',31),
-  ('type -> INT','type',1,'p_type','entrada_saida.py',37),
-  ('type -> FLOAT','type',1,'p_type','entrada_saida.py',38),
-  ('type -> STR','type',1,'p_type','entrada_saida.py',39),
-  ('expression -> NUMBER','expression',1,'p_expression','entrada_saida.py',43),
-  ('expression -> FNUMBER','expression',1,'p_expression','entrada_saida.py',44),
-  ('expression -> STRING','expression',1,'p_expression','entrada_saida.py',45),
-  ('expression -> ID','expression',1,'p_expression','entrada_saida.py',46),
+  ('type -> INT','type',1,'p_type','entrada_saida.py',38),
+  ('type -> FLOAT','type',1,'p_type','entrada_saida.py',39),
+  ('type -> STR','type',1,'p_type','entrada_saida.py',40),
+  ('expression -> NUMBER','expression',1,'p_expression','entrada_saida.py',44),
+  ('expression -> FNUMBER','expression',1,'p_expression','entrada_saida.py',45),
+  ('expression -> STRING','expression',1,'p_expression','entrada_saida.py',46),
+  ('expression -> ID','expression',1,'p_expression','entrada_saida.py',47),
+  ('expression -> input_call','expression',1,'p_expression','entrada_saida.py',48),
+  ('input_call -> INPUT LPAREN RPAREN','input_call',3,'p_input_call','entrada_saida.py',52),
+  ('input_call -> INPUT LPAREN STRING RPAREN','input_call',4,'p_input_call','entrada_saida.py',53),
 ]

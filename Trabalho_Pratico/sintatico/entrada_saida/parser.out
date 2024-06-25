@@ -18,6 +18,9 @@ Rule 12    expression -> NUMBER
 Rule 13    expression -> FNUMBER
 Rule 14    expression -> STRING
 Rule 15    expression -> ID
+Rule 16    expression -> input_call
+Rule 17    input_call -> INPUT LPAREN RPAREN
+Rule 18    input_call -> INPUT LPAREN STRING RPAREN
 
 Terminals, with rules where they appear
 
@@ -25,20 +28,22 @@ EQUALS               : 6
 FLOAT                : 10
 FNUMBER              : 13
 ID                   : 6 7 15
+INPUT                : 17 18
 INT                  : 9
-LPAREN               : 7 8
+LPAREN               : 7 8 17 18
 NEWLINE              : 6 7 8
 NUMBER               : 12
 PRINT                : 7 8
-RPAREN               : 7 8
+RPAREN               : 7 8 17 18
 STR                  : 11
-STRING               : 8 14
+STRING               : 8 14 18
 error                : 
 
 Nonterminals, with rules where they appear
 
 declaration          : 4
 expression           : 6
+input_call           : 16
 print_statement      : 5
 program              : 0
 statement            : 2 3
@@ -207,26 +212,31 @@ state 14
     (13) expression -> . FNUMBER
     (14) expression -> . STRING
     (15) expression -> . ID
+    (16) expression -> . input_call
+    (17) input_call -> . INPUT LPAREN RPAREN
+    (18) input_call -> . INPUT LPAREN STRING RPAREN
 
     NUMBER          shift and go to state 19
     FNUMBER         shift and go to state 20
     STRING          shift and go to state 21
     ID              shift and go to state 17
+    INPUT           shift and go to state 23
 
     expression                     shift and go to state 18
+    input_call                     shift and go to state 22
 
 state 15
 
     (7) print_statement -> PRINT LPAREN ID . RPAREN NEWLINE
 
-    RPAREN          shift and go to state 22
+    RPAREN          shift and go to state 24
 
 
 state 16
 
     (8) print_statement -> PRINT LPAREN STRING . RPAREN NEWLINE
 
-    RPAREN          shift and go to state 23
+    RPAREN          shift and go to state 25
 
 
 state 17
@@ -240,7 +250,7 @@ state 18
 
     (6) declaration -> type ID EQUALS expression . NEWLINE
 
-    NEWLINE         shift and go to state 24
+    NEWLINE         shift and go to state 26
 
 
 state 19
@@ -266,19 +276,34 @@ state 21
 
 state 22
 
-    (7) print_statement -> PRINT LPAREN ID RPAREN . NEWLINE
+    (16) expression -> input_call .
 
-    NEWLINE         shift and go to state 25
+    NEWLINE         reduce using rule 16 (expression -> input_call .)
 
 
 state 23
 
-    (8) print_statement -> PRINT LPAREN STRING RPAREN . NEWLINE
+    (17) input_call -> INPUT . LPAREN RPAREN
+    (18) input_call -> INPUT . LPAREN STRING RPAREN
 
-    NEWLINE         shift and go to state 26
+    LPAREN          shift and go to state 27
 
 
 state 24
+
+    (7) print_statement -> PRINT LPAREN ID RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 28
+
+
+state 25
+
+    (8) print_statement -> PRINT LPAREN STRING RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 29
+
+
+state 26
 
     (6) declaration -> type ID EQUALS expression NEWLINE .
 
@@ -289,7 +314,16 @@ state 24
     $end            reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
 
 
-state 25
+state 27
+
+    (17) input_call -> INPUT LPAREN . RPAREN
+    (18) input_call -> INPUT LPAREN . STRING RPAREN
+
+    RPAREN          shift and go to state 30
+    STRING          shift and go to state 31
+
+
+state 28
 
     (7) print_statement -> PRINT LPAREN ID RPAREN NEWLINE .
 
@@ -300,7 +334,7 @@ state 25
     $end            reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
 
 
-state 26
+state 29
 
     (8) print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .
 
@@ -309,4 +343,25 @@ state 26
     FLOAT           reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
     STR             reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
     $end            reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+
+
+state 30
+
+    (17) input_call -> INPUT LPAREN RPAREN .
+
+    NEWLINE         reduce using rule 17 (input_call -> INPUT LPAREN RPAREN .)
+
+
+state 31
+
+    (18) input_call -> INPUT LPAREN STRING . RPAREN
+
+    RPAREN          shift and go to state 32
+
+
+state 32
+
+    (18) input_call -> INPUT LPAREN STRING RPAREN .
+
+    NEWLINE         reduce using rule 18 (input_call -> INPUT LPAREN STRING RPAREN .)
 

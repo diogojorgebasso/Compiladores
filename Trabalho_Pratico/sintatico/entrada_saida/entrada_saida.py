@@ -44,8 +44,17 @@ def p_expression(p):
     '''expression : NUMBER
                   | FNUMBER
                   | STRING
-                  | ID'''
+                  | ID
+                  | input_call'''
     p[0] = p[1]
+
+def p_input_call(p):
+    '''input_call : INPUT LPAREN RPAREN
+                  | INPUT LPAREN STRING RPAREN'''
+    if len(p) == 4:  # Matches input()
+        p[0] = "input()"
+    else:  # Matches input("some string")
+        p[0] = f'input({p[3]})'
 
 def p_error(p):
     print("Erro sintático no '%s' na linha %d" % (p.value, p.lineno))
@@ -54,7 +63,7 @@ parser = yacc.yacc()
 
 data = """int a = 5
 float b = -5.1
-str c = 'teste'
+str c = input("digite o numero")
 print(a)
 print('teste')
 print("teste")
@@ -62,10 +71,10 @@ print("teste")
 
 result = parser.parse(data)
 code_to_execute = ''.join(result)
-print(code_to_execute)
 # escrevendo para um arquivo específico
 with open('Trabalho_Pratico/sintatico/entrada_saida/output.txt', 'w') as file:
     file.write(code_to_execute)
 
+print("\nExecutando o código gerado:")
 #executando o código no próprio script    
 exec(code_to_execute)

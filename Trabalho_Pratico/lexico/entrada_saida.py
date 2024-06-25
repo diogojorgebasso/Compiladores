@@ -16,13 +16,15 @@ tokens = (
    'NEWLINE',
    'LPAREN',
    'RPAREN',
+   'INPUT'  
 )
 
 reserved = {
    'int' : 'INT',
    'float' : 'FLOAT',
    'str' : 'STR',
-   'print' : 'PRINT'
+   'print' : 'PRINT',
+   'input' : 'INPUT'
 }
 
 t_EQUALS    = r'='
@@ -69,7 +71,7 @@ lexer = lex.lex()
 
 lexer.input("""int a = 5
             float b = -5.1
-            str c = 'teste'
+            str c = input()
             print(a)
             print('teste')
             print("teste")""")
