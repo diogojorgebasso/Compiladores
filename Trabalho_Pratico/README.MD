@@ -6,24 +6,28 @@ Este é um script Python que usa a biblioteca PLY (Python Lex-Yacc) para criar u
 
 - Python 3.x
 - Biblioteca PLY (Python Lex-Yacc)
+- Biblioteca yacc
 
 Você pode instalar o PLY usando o pip:
 
 ```bash
 pip install ply
+pip install yacc
 ```
 
 ## Como executar
 
-Como este é um script Python, não é necessário compilar. Você pode executar o script diretamente usando o interpretador Python.
+Você pode executar o script diretamente usando o interpretador Python, em cada subpasta na qual o resultado do exercício se encontra.
 
 ```bash
 python condicionais.py
+python repeticao.py
+e assim por diante
 ```	
 
 ## Execução
 
-O script lê uma string de entrada que contém o código na linguagem de programação que criei e imprime os tokens reconhecidos. Os tokens são também gravados em um arquivo chamado '[method].txt', onde method representa a pasta que foi chamada.
+O script lê uma string de entrada que contém o código na linguagem de programação que criei e imprime os tokens reconhecidos. Os tokens são também gravados em um arquivo chamado '[method].txt', onde "method" representa a pasta que foi chamada.
 
 Por exemplo, a entrada:
 
@@ -64,5 +68,8 @@ LexToken(NEWLINE,'\n',3,58)
 .
 .
 ```
-
-
+e para o arquivo compilado:
+    
+```bash
+a maior que b
+```
