@@ -17,29 +17,23 @@ tokens = (
    'LPAREN',
    'RPAREN',
    'IF',
-   'COMANDOCONDICIONAL',
    'ELSE',
    'LBRACKET',
    'RBRACKET',
    'AND',
    'OR',
-   'MOD',
    'GT',
    'LT',
    'DIF',
-   'DIVISION',
-   'MULTIPLICATION',
-   'PLUS',
-   'MINUS',
    'MATHEQUALS',
-   'TRUE',
 )
 
 reserved = {
    'int' : 'INT',
    'float' : 'FLOAT',
    'str' : 'STR',
-   'print' : 'PRINT'
+   'print' : 'PRINT',
+   'if': 'IF'
 }
 
 t_EQUALS    = r'='
@@ -52,21 +46,12 @@ t_RBRACKET  = r'\}'
 t_GT = r'>'
 t_LT = r'<'
 t_DIF = r'!='
-t_DIVISION = r'/'
-t_MULTIPLICATION = r'\*'
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_AND = r'and'
 t_OR = r'or'
-t_MOD = r'mod'
 t_MATHEQUALS = r'=='
 
 #CONDICIONAIS
 t_IF = r'if'
 
-def t_COMANDOCONDICIONAL(t):
-    r'if\((.*?)\)'
-    return t
 
 def t_NEWLINE(t):
     r'\n+'
@@ -121,6 +106,7 @@ lexer.input("""int a = 5
             }else{
                 print("b maior que a")
             }
+
             """)
 
 while True:
