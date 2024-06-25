@@ -12,55 +12,56 @@ Rule 6     statement -> conditional_statement
 Rule 7     declaration -> type ID EQUALS expression NEWLINE
 Rule 8     conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 Rule 9     conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-Rule 10    print_statement -> PRINT LPAREN expression RPAREN NEWLINE
-Rule 11    condition -> expression comparator expression
-Rule 12    condition -> expression comparator expression AND condition
-Rule 13    condition -> expression comparator expression OR condition
-Rule 14    comparator -> GT
-Rule 15    comparator -> LT
-Rule 16    comparator -> DIF
-Rule 17    comparator -> MATHEQUALS
-Rule 18    type -> INT
-Rule 19    type -> FLOAT
-Rule 20    type -> STR
-Rule 21    expression -> NUMBER
-Rule 22    expression -> FNUMBER
-Rule 23    expression -> STRING
-Rule 24    expression -> ID
+Rule 10    print_statement -> PRINT LPAREN ID RPAREN NEWLINE
+Rule 11    print_statement -> PRINT LPAREN STRING RPAREN NEWLINE
+Rule 12    condition -> expression comparator expression
+Rule 13    condition -> expression comparator expression AND condition
+Rule 14    condition -> expression comparator expression OR condition
+Rule 15    comparator -> GT
+Rule 16    comparator -> LT
+Rule 17    comparator -> DIF
+Rule 18    comparator -> MATHEQUALS
+Rule 19    type -> INT
+Rule 20    type -> FLOAT
+Rule 21    type -> STR
+Rule 22    expression -> NUMBER
+Rule 23    expression -> FNUMBER
+Rule 24    expression -> STRING
+Rule 25    expression -> ID
 
 Terminals, with rules where they appear
 
-AND                  : 12
-DIF                  : 16
+AND                  : 13
+DIF                  : 17
 ELSE                 : 9
 EQUALS               : 7
-FLOAT                : 19
-FNUMBER              : 22
-GT                   : 14
-ID                   : 7 24
+FLOAT                : 20
+FNUMBER              : 23
+GT                   : 15
+ID                   : 7 10 25
 IF                   : 8 9
-INT                  : 18
+INT                  : 19
 LBRACKET             : 8 9 9
-LPAREN               : 8 9 10
-LT                   : 15
-MATHEQUALS           : 17
-NEWLINE              : 7 8 8 9 9 9 10
-NUMBER               : 21
-OR                   : 13
-PRINT                : 10
+LPAREN               : 8 9 10 11
+LT                   : 16
+MATHEQUALS           : 18
+NEWLINE              : 7 8 8 9 9 9 10 11
+NUMBER               : 22
+OR                   : 14
+PRINT                : 10 11
 RBRACKET             : 8 9 9
-RPAREN               : 8 9 10
-STR                  : 20
-STRING               : 23
+RPAREN               : 8 9 10 11
+STR                  : 21
+STRING               : 11 24
 error                : 
 
 Nonterminals, with rules where they appear
 
-comparator           : 11 12 13
-condition            : 8 9 12 13
+comparator           : 12 13 14
+condition            : 8 9 13 14
 conditional_statement : 6
 declaration          : 4
-expression           : 7 10 11 11 12 12 13 13
+expression           : 7 12 12 13 13 14 14
 print_statement      : 5 8 9 9
 program              : 0
 statement            : 2 3
@@ -79,12 +80,13 @@ state 0
     (5) statement -> . print_statement
     (6) statement -> . conditional_statement
     (7) declaration -> . type ID EQUALS expression NEWLINE
-    (10) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (10) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (11) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
     (8) conditional_statement -> . IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
     (9) conditional_statement -> . IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (18) type -> . INT
-    (19) type -> . FLOAT
-    (20) type -> . STR
+    (19) type -> . INT
+    (20) type -> . FLOAT
+    (21) type -> . STR
 
     PRINT           shift and go to state 8
     IF              shift and go to state 9
@@ -114,12 +116,13 @@ state 2
     (5) statement -> . print_statement
     (6) statement -> . conditional_statement
     (7) declaration -> . type ID EQUALS expression NEWLINE
-    (10) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (10) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (11) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
     (8) conditional_statement -> . IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
     (9) conditional_statement -> . IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (18) type -> . INT
-    (19) type -> . FLOAT
-    (20) type -> . STR
+    (19) type -> . INT
+    (20) type -> . FLOAT
+    (21) type -> . STR
 
     $end            reduce using rule 1 (program -> statement_list .)
     PRINT           shift and go to state 8
@@ -191,7 +194,8 @@ state 7
 
 state 8
 
-    (10) print_statement -> PRINT . LPAREN expression RPAREN NEWLINE
+    (10) print_statement -> PRINT . LPAREN ID RPAREN NEWLINE
+    (11) print_statement -> PRINT . LPAREN STRING RPAREN NEWLINE
 
     LPAREN          shift and go to state 15
 
@@ -206,23 +210,23 @@ state 9
 
 state 10
 
-    (18) type -> INT .
+    (19) type -> INT .
 
-    ID              reduce using rule 18 (type -> INT .)
+    ID              reduce using rule 19 (type -> INT .)
 
 
 state 11
 
-    (19) type -> FLOAT .
+    (20) type -> FLOAT .
 
-    ID              reduce using rule 19 (type -> FLOAT .)
+    ID              reduce using rule 20 (type -> FLOAT .)
 
 
 state 12
 
-    (20) type -> STR .
+    (21) type -> STR .
 
-    ID              reduce using rule 20 (type -> STR .)
+    ID              reduce using rule 21 (type -> STR .)
 
 
 state 13
@@ -246,222 +250,230 @@ state 14
 
 state 15
 
-    (10) print_statement -> PRINT LPAREN . expression RPAREN NEWLINE
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (10) print_statement -> PRINT LPAREN . ID RPAREN NEWLINE
+    (11) print_statement -> PRINT LPAREN . STRING RPAREN NEWLINE
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    ID              shift and go to state 18
+    STRING          shift and go to state 19
 
-    expression                     shift and go to state 18
 
 state 16
 
     (8) conditional_statement -> IF LPAREN . condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
     (9) conditional_statement -> IF LPAREN . condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (11) condition -> . expression comparator expression
-    (12) condition -> . expression comparator expression AND condition
-    (13) condition -> . expression comparator expression OR condition
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (12) condition -> . expression comparator expression
+    (13) condition -> . expression comparator expression AND condition
+    (14) condition -> . expression comparator expression OR condition
+    (22) expression -> . NUMBER
+    (23) expression -> . FNUMBER
+    (24) expression -> . STRING
+    (25) expression -> . ID
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    NUMBER          shift and go to state 22
+    FNUMBER         shift and go to state 23
+    STRING          shift and go to state 24
+    ID              shift and go to state 25
 
-    condition                      shift and go to state 23
-    expression                     shift and go to state 24
+    condition                      shift and go to state 20
+    expression                     shift and go to state 21
 
 state 17
 
     (7) declaration -> type ID EQUALS . expression NEWLINE
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (22) expression -> . NUMBER
+    (23) expression -> . FNUMBER
+    (24) expression -> . STRING
+    (25) expression -> . ID
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    NUMBER          shift and go to state 22
+    FNUMBER         shift and go to state 23
+    STRING          shift and go to state 24
+    ID              shift and go to state 25
 
-    expression                     shift and go to state 25
+    expression                     shift and go to state 26
 
 state 18
 
-    (10) print_statement -> PRINT LPAREN expression . RPAREN NEWLINE
-
-    RPAREN          shift and go to state 26
-
-
-state 19
-
-    (21) expression -> NUMBER .
-
-    RPAREN          reduce using rule 21 (expression -> NUMBER .)
-    GT              reduce using rule 21 (expression -> NUMBER .)
-    LT              reduce using rule 21 (expression -> NUMBER .)
-    DIF             reduce using rule 21 (expression -> NUMBER .)
-    MATHEQUALS      reduce using rule 21 (expression -> NUMBER .)
-    NEWLINE         reduce using rule 21 (expression -> NUMBER .)
-    AND             reduce using rule 21 (expression -> NUMBER .)
-    OR              reduce using rule 21 (expression -> NUMBER .)
-
-
-state 20
-
-    (22) expression -> FNUMBER .
-
-    RPAREN          reduce using rule 22 (expression -> FNUMBER .)
-    GT              reduce using rule 22 (expression -> FNUMBER .)
-    LT              reduce using rule 22 (expression -> FNUMBER .)
-    DIF             reduce using rule 22 (expression -> FNUMBER .)
-    MATHEQUALS      reduce using rule 22 (expression -> FNUMBER .)
-    NEWLINE         reduce using rule 22 (expression -> FNUMBER .)
-    AND             reduce using rule 22 (expression -> FNUMBER .)
-    OR              reduce using rule 22 (expression -> FNUMBER .)
-
-
-state 21
-
-    (23) expression -> STRING .
-
-    RPAREN          reduce using rule 23 (expression -> STRING .)
-    GT              reduce using rule 23 (expression -> STRING .)
-    LT              reduce using rule 23 (expression -> STRING .)
-    DIF             reduce using rule 23 (expression -> STRING .)
-    MATHEQUALS      reduce using rule 23 (expression -> STRING .)
-    NEWLINE         reduce using rule 23 (expression -> STRING .)
-    AND             reduce using rule 23 (expression -> STRING .)
-    OR              reduce using rule 23 (expression -> STRING .)
-
-
-state 22
-
-    (24) expression -> ID .
-
-    RPAREN          reduce using rule 24 (expression -> ID .)
-    GT              reduce using rule 24 (expression -> ID .)
-    LT              reduce using rule 24 (expression -> ID .)
-    DIF             reduce using rule 24 (expression -> ID .)
-    MATHEQUALS      reduce using rule 24 (expression -> ID .)
-    NEWLINE         reduce using rule 24 (expression -> ID .)
-    AND             reduce using rule 24 (expression -> ID .)
-    OR              reduce using rule 24 (expression -> ID .)
-
-
-state 23
-
-    (8) conditional_statement -> IF LPAREN condition . RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (9) conditional_statement -> IF LPAREN condition . RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+    (10) print_statement -> PRINT LPAREN ID . RPAREN NEWLINE
 
     RPAREN          shift and go to state 27
 
 
+state 19
+
+    (11) print_statement -> PRINT LPAREN STRING . RPAREN NEWLINE
+
+    RPAREN          shift and go to state 28
+
+
+state 20
+
+    (8) conditional_statement -> IF LPAREN condition . RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+    (9) conditional_statement -> IF LPAREN condition . RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+
+    RPAREN          shift and go to state 29
+
+
+state 21
+
+    (12) condition -> expression . comparator expression
+    (13) condition -> expression . comparator expression AND condition
+    (14) condition -> expression . comparator expression OR condition
+    (15) comparator -> . GT
+    (16) comparator -> . LT
+    (17) comparator -> . DIF
+    (18) comparator -> . MATHEQUALS
+
+    GT              shift and go to state 31
+    LT              shift and go to state 32
+    DIF             shift and go to state 33
+    MATHEQUALS      shift and go to state 34
+
+    comparator                     shift and go to state 30
+
+state 22
+
+    (22) expression -> NUMBER .
+
+    GT              reduce using rule 22 (expression -> NUMBER .)
+    LT              reduce using rule 22 (expression -> NUMBER .)
+    DIF             reduce using rule 22 (expression -> NUMBER .)
+    MATHEQUALS      reduce using rule 22 (expression -> NUMBER .)
+    NEWLINE         reduce using rule 22 (expression -> NUMBER .)
+    AND             reduce using rule 22 (expression -> NUMBER .)
+    OR              reduce using rule 22 (expression -> NUMBER .)
+    RPAREN          reduce using rule 22 (expression -> NUMBER .)
+
+
+state 23
+
+    (23) expression -> FNUMBER .
+
+    GT              reduce using rule 23 (expression -> FNUMBER .)
+    LT              reduce using rule 23 (expression -> FNUMBER .)
+    DIF             reduce using rule 23 (expression -> FNUMBER .)
+    MATHEQUALS      reduce using rule 23 (expression -> FNUMBER .)
+    NEWLINE         reduce using rule 23 (expression -> FNUMBER .)
+    AND             reduce using rule 23 (expression -> FNUMBER .)
+    OR              reduce using rule 23 (expression -> FNUMBER .)
+    RPAREN          reduce using rule 23 (expression -> FNUMBER .)
+
+
 state 24
 
-    (11) condition -> expression . comparator expression
-    (12) condition -> expression . comparator expression AND condition
-    (13) condition -> expression . comparator expression OR condition
-    (14) comparator -> . GT
-    (15) comparator -> . LT
-    (16) comparator -> . DIF
-    (17) comparator -> . MATHEQUALS
+    (24) expression -> STRING .
 
-    GT              shift and go to state 29
-    LT              shift and go to state 30
-    DIF             shift and go to state 31
-    MATHEQUALS      shift and go to state 32
+    GT              reduce using rule 24 (expression -> STRING .)
+    LT              reduce using rule 24 (expression -> STRING .)
+    DIF             reduce using rule 24 (expression -> STRING .)
+    MATHEQUALS      reduce using rule 24 (expression -> STRING .)
+    NEWLINE         reduce using rule 24 (expression -> STRING .)
+    AND             reduce using rule 24 (expression -> STRING .)
+    OR              reduce using rule 24 (expression -> STRING .)
+    RPAREN          reduce using rule 24 (expression -> STRING .)
 
-    comparator                     shift and go to state 28
 
 state 25
 
-    (7) declaration -> type ID EQUALS expression . NEWLINE
+    (25) expression -> ID .
 
-    NEWLINE         shift and go to state 33
+    GT              reduce using rule 25 (expression -> ID .)
+    LT              reduce using rule 25 (expression -> ID .)
+    DIF             reduce using rule 25 (expression -> ID .)
+    MATHEQUALS      reduce using rule 25 (expression -> ID .)
+    NEWLINE         reduce using rule 25 (expression -> ID .)
+    AND             reduce using rule 25 (expression -> ID .)
+    OR              reduce using rule 25 (expression -> ID .)
+    RPAREN          reduce using rule 25 (expression -> ID .)
 
 
 state 26
 
-    (10) print_statement -> PRINT LPAREN expression RPAREN . NEWLINE
+    (7) declaration -> type ID EQUALS expression . NEWLINE
 
-    NEWLINE         shift and go to state 34
+    NEWLINE         shift and go to state 35
 
 
 state 27
 
-    (8) conditional_statement -> IF LPAREN condition RPAREN . LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (9) conditional_statement -> IF LPAREN condition RPAREN . LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+    (10) print_statement -> PRINT LPAREN ID RPAREN . NEWLINE
 
-    LBRACKET        shift and go to state 35
+    NEWLINE         shift and go to state 36
 
 
 state 28
 
-    (11) condition -> expression comparator . expression
-    (12) condition -> expression comparator . expression AND condition
-    (13) condition -> expression comparator . expression OR condition
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (11) print_statement -> PRINT LPAREN STRING RPAREN . NEWLINE
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    NEWLINE         shift and go to state 37
 
-    expression                     shift and go to state 36
 
 state 29
 
-    (14) comparator -> GT .
+    (8) conditional_statement -> IF LPAREN condition RPAREN . LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+    (9) conditional_statement -> IF LPAREN condition RPAREN . LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 
-    NUMBER          reduce using rule 14 (comparator -> GT .)
-    FNUMBER         reduce using rule 14 (comparator -> GT .)
-    STRING          reduce using rule 14 (comparator -> GT .)
-    ID              reduce using rule 14 (comparator -> GT .)
+    LBRACKET        shift and go to state 38
 
 
 state 30
 
-    (15) comparator -> LT .
+    (12) condition -> expression comparator . expression
+    (13) condition -> expression comparator . expression AND condition
+    (14) condition -> expression comparator . expression OR condition
+    (22) expression -> . NUMBER
+    (23) expression -> . FNUMBER
+    (24) expression -> . STRING
+    (25) expression -> . ID
 
-    NUMBER          reduce using rule 15 (comparator -> LT .)
-    FNUMBER         reduce using rule 15 (comparator -> LT .)
-    STRING          reduce using rule 15 (comparator -> LT .)
-    ID              reduce using rule 15 (comparator -> LT .)
+    NUMBER          shift and go to state 22
+    FNUMBER         shift and go to state 23
+    STRING          shift and go to state 24
+    ID              shift and go to state 25
 
+    expression                     shift and go to state 39
 
 state 31
 
-    (16) comparator -> DIF .
+    (15) comparator -> GT .
 
-    NUMBER          reduce using rule 16 (comparator -> DIF .)
-    FNUMBER         reduce using rule 16 (comparator -> DIF .)
-    STRING          reduce using rule 16 (comparator -> DIF .)
-    ID              reduce using rule 16 (comparator -> DIF .)
+    NUMBER          reduce using rule 15 (comparator -> GT .)
+    FNUMBER         reduce using rule 15 (comparator -> GT .)
+    STRING          reduce using rule 15 (comparator -> GT .)
+    ID              reduce using rule 15 (comparator -> GT .)
 
 
 state 32
 
-    (17) comparator -> MATHEQUALS .
+    (16) comparator -> LT .
 
-    NUMBER          reduce using rule 17 (comparator -> MATHEQUALS .)
-    FNUMBER         reduce using rule 17 (comparator -> MATHEQUALS .)
-    STRING          reduce using rule 17 (comparator -> MATHEQUALS .)
-    ID              reduce using rule 17 (comparator -> MATHEQUALS .)
+    NUMBER          reduce using rule 16 (comparator -> LT .)
+    FNUMBER         reduce using rule 16 (comparator -> LT .)
+    STRING          reduce using rule 16 (comparator -> LT .)
+    ID              reduce using rule 16 (comparator -> LT .)
 
 
 state 33
+
+    (17) comparator -> DIF .
+
+    NUMBER          reduce using rule 17 (comparator -> DIF .)
+    FNUMBER         reduce using rule 17 (comparator -> DIF .)
+    STRING          reduce using rule 17 (comparator -> DIF .)
+    ID              reduce using rule 17 (comparator -> DIF .)
+
+
+state 34
+
+    (18) comparator -> MATHEQUALS .
+
+    NUMBER          reduce using rule 18 (comparator -> MATHEQUALS .)
+    FNUMBER         reduce using rule 18 (comparator -> MATHEQUALS .)
+    STRING          reduce using rule 18 (comparator -> MATHEQUALS .)
+    ID              reduce using rule 18 (comparator -> MATHEQUALS .)
+
+
+state 35
 
     (7) declaration -> type ID EQUALS expression NEWLINE .
 
@@ -473,118 +485,132 @@ state 33
     $end            reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
 
 
-state 34
-
-    (10) print_statement -> PRINT LPAREN expression RPAREN NEWLINE .
-
-    PRINT           reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    IF              reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    INT             reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    FLOAT           reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    STR             reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    $end            reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    RBRACKET        reduce using rule 10 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-
-
-state 35
-
-    (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET . NEWLINE print_statement RBRACKET NEWLINE
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET . NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-
-    NEWLINE         shift and go to state 37
-
-
 state 36
 
-    (11) condition -> expression comparator expression .
-    (12) condition -> expression comparator expression . AND condition
-    (13) condition -> expression comparator expression . OR condition
+    (10) print_statement -> PRINT LPAREN ID RPAREN NEWLINE .
 
-    RPAREN          reduce using rule 11 (condition -> expression comparator expression .)
-    AND             shift and go to state 38
-    OR              shift and go to state 39
+    PRINT           reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    IF              reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    INT             reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    FLOAT           reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    STR             reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    $end            reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    RBRACKET        reduce using rule 10 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
 
 
 state 37
 
-    (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE . print_statement RBRACKET NEWLINE
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE . print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
-    (10) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
+    (11) print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .
 
-    PRINT           shift and go to state 8
+    PRINT           reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    IF              reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    INT             reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    FLOAT           reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    STR             reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    $end            reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    RBRACKET        reduce using rule 11 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
 
-    print_statement                shift and go to state 40
 
 state 38
 
-    (12) condition -> expression comparator expression AND . condition
-    (11) condition -> . expression comparator expression
-    (12) condition -> . expression comparator expression AND condition
-    (13) condition -> . expression comparator expression OR condition
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET . NEWLINE print_statement RBRACKET NEWLINE
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET . NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    NEWLINE         shift and go to state 40
 
-    expression                     shift and go to state 24
-    condition                      shift and go to state 41
 
 state 39
 
-    (13) condition -> expression comparator expression OR . condition
-    (11) condition -> . expression comparator expression
-    (12) condition -> . expression comparator expression AND condition
-    (13) condition -> . expression comparator expression OR condition
-    (21) expression -> . NUMBER
-    (22) expression -> . FNUMBER
-    (23) expression -> . STRING
-    (24) expression -> . ID
+    (12) condition -> expression comparator expression .
+    (13) condition -> expression comparator expression . AND condition
+    (14) condition -> expression comparator expression . OR condition
 
-    NUMBER          shift and go to state 19
-    FNUMBER         shift and go to state 20
-    STRING          shift and go to state 21
-    ID              shift and go to state 22
+    RPAREN          reduce using rule 12 (condition -> expression comparator expression .)
+    AND             shift and go to state 41
+    OR              shift and go to state 42
 
-    expression                     shift and go to state 24
-    condition                      shift and go to state 42
 
 state 40
+
+    (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE . print_statement RBRACKET NEWLINE
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE . print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
+    (10) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (11) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
+
+    PRINT           shift and go to state 8
+
+    print_statement                shift and go to state 43
+
+state 41
+
+    (13) condition -> expression comparator expression AND . condition
+    (12) condition -> . expression comparator expression
+    (13) condition -> . expression comparator expression AND condition
+    (14) condition -> . expression comparator expression OR condition
+    (22) expression -> . NUMBER
+    (23) expression -> . FNUMBER
+    (24) expression -> . STRING
+    (25) expression -> . ID
+
+    NUMBER          shift and go to state 22
+    FNUMBER         shift and go to state 23
+    STRING          shift and go to state 24
+    ID              shift and go to state 25
+
+    expression                     shift and go to state 21
+    condition                      shift and go to state 44
+
+state 42
+
+    (14) condition -> expression comparator expression OR . condition
+    (12) condition -> . expression comparator expression
+    (13) condition -> . expression comparator expression AND condition
+    (14) condition -> . expression comparator expression OR condition
+    (22) expression -> . NUMBER
+    (23) expression -> . FNUMBER
+    (24) expression -> . STRING
+    (25) expression -> . ID
+
+    NUMBER          shift and go to state 22
+    FNUMBER         shift and go to state 23
+    STRING          shift and go to state 24
+    ID              shift and go to state 25
+
+    expression                     shift and go to state 21
+    condition                      shift and go to state 45
+
+state 43
 
     (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement . RBRACKET NEWLINE
     (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement . RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 
-    RBRACKET        shift and go to state 43
+    RBRACKET        shift and go to state 46
 
 
-state 41
+state 44
 
-    (12) condition -> expression comparator expression AND condition .
+    (13) condition -> expression comparator expression AND condition .
 
-    RPAREN          reduce using rule 12 (condition -> expression comparator expression AND condition .)
-
-
-state 42
-
-    (13) condition -> expression comparator expression OR condition .
-
-    RPAREN          reduce using rule 13 (condition -> expression comparator expression OR condition .)
+    RPAREN          reduce using rule 13 (condition -> expression comparator expression AND condition .)
 
 
-state 43
+state 45
+
+    (14) condition -> expression comparator expression OR condition .
+
+    RPAREN          reduce using rule 14 (condition -> expression comparator expression OR condition .)
+
+
+state 46
 
     (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET . NEWLINE
     (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET . ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 
-    NEWLINE         shift and go to state 44
-    ELSE            shift and go to state 45
+    NEWLINE         shift and go to state 47
+    ELSE            shift and go to state 48
 
 
-state 44
+state 47
 
     (8) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE .
 
@@ -596,44 +622,45 @@ state 44
     $end            reduce using rule 8 (conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE .)
 
 
-state 45
+state 48
 
     (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE . LBRACKET NEWLINE print_statement RBRACKET NEWLINE
 
-    LBRACKET        shift and go to state 46
-
-
-state 46
-
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET . NEWLINE print_statement RBRACKET NEWLINE
-
-    NEWLINE         shift and go to state 47
-
-
-state 47
-
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE . print_statement RBRACKET NEWLINE
-    (10) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
-
-    PRINT           shift and go to state 8
-
-    print_statement                shift and go to state 48
-
-state 48
-
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement . RBRACKET NEWLINE
-
-    RBRACKET        shift and go to state 49
+    LBRACKET        shift and go to state 49
 
 
 state 49
 
-    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET . NEWLINE
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET . NEWLINE print_statement RBRACKET NEWLINE
 
     NEWLINE         shift and go to state 50
 
 
 state 50
+
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE . print_statement RBRACKET NEWLINE
+    (10) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (11) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
+
+    PRINT           shift and go to state 8
+
+    print_statement                shift and go to state 51
+
+state 51
+
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement . RBRACKET NEWLINE
+
+    RBRACKET        shift and go to state 52
+
+
+state 52
+
+    (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET . NEWLINE
+
+    NEWLINE         shift and go to state 53
+
+
+state 53
 
     (9) conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE .
 

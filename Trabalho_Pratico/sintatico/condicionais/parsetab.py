@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND DIF ELSE EQUALS FLOAT FNUMBER GT ID IF INT LBRACKET LPAREN LT MATHEQUALS NEWLINE NUMBER OR PRINT RBRACKET RPAREN STR STRINGprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : declaration\n                 | print_statement\n                 | conditional_statementdeclaration : type ID EQUALS expression NEWLINEconditional_statement : IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE\n                             | IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINEprint_statement : PRINT LPAREN expression RPAREN NEWLINEcondition : expression comparator expression\n                 | expression comparator expression AND condition\n                 | expression comparator expression OR conditioncomparator : GT\n                  | LT\n                  | DIF\n                  | MATHEQUALStype : INT\n            | FLOAT\n            | STRexpression : NUMBER\n                  | FNUMBER\n                  | STRING\n                  | ID'
+_lr_signature = 'AND DIF ELSE EQUALS FLOAT FNUMBER GT ID IF INT LBRACKET LPAREN LT MATHEQUALS NEWLINE NUMBER OR PRINT RBRACKET RPAREN STR STRINGprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : declaration\n                 | print_statement\n                 | conditional_statementdeclaration : type ID EQUALS expression NEWLINEconditional_statement : IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE\n                             | IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINEprint_statement : PRINT LPAREN ID RPAREN NEWLINE\n                       | PRINT LPAREN STRING RPAREN NEWLINEcondition : expression comparator expression\n                 | expression comparator expression AND condition\n                 | expression comparator expression OR conditioncomparator : GT\n                  | LT\n                  | DIF\n                  | MATHEQUALStype : INT\n            | FLOAT\n            | STRexpression : NUMBER\n                  | FNUMBER\n                  | STRING\n                  | ID'
     
-_lr_action_items = {'PRINT':([0,2,3,4,5,6,13,33,34,37,44,47,50,],[8,8,-2,-4,-5,-6,-3,-7,-10,8,-8,8,-9,]),'IF':([0,2,3,4,5,6,13,33,34,44,50,],[9,9,-2,-4,-5,-6,-3,-7,-10,-8,-9,]),'INT':([0,2,3,4,5,6,13,33,34,44,50,],[10,10,-2,-4,-5,-6,-3,-7,-10,-8,-9,]),'FLOAT':([0,2,3,4,5,6,13,33,34,44,50,],[11,11,-2,-4,-5,-6,-3,-7,-10,-8,-9,]),'STR':([0,2,3,4,5,6,13,33,34,44,50,],[12,12,-2,-4,-5,-6,-3,-7,-10,-8,-9,]),'$end':([1,2,3,4,5,6,13,33,34,44,50,],[0,-1,-2,-4,-5,-6,-3,-7,-10,-8,-9,]),'ID':([7,10,11,12,15,16,17,28,29,30,31,32,38,39,],[14,-18,-19,-20,22,22,22,22,-14,-15,-16,-17,22,22,]),'LPAREN':([8,9,],[15,16,]),'EQUALS':([14,],[17,]),'NUMBER':([15,16,17,28,29,30,31,32,38,39,],[19,19,19,19,-14,-15,-16,-17,19,19,]),'FNUMBER':([15,16,17,28,29,30,31,32,38,39,],[20,20,20,20,-14,-15,-16,-17,20,20,]),'STRING':([15,16,17,28,29,30,31,32,38,39,],[21,21,21,21,-14,-15,-16,-17,21,21,]),'RPAREN':([18,19,20,21,22,23,36,41,42,],[26,-21,-22,-23,-24,27,-11,-12,-13,]),'GT':([19,20,21,22,24,],[-21,-22,-23,-24,29,]),'LT':([19,20,21,22,24,],[-21,-22,-23,-24,30,]),'DIF':([19,20,21,22,24,],[-21,-22,-23,-24,31,]),'MATHEQUALS':([19,20,21,22,24,],[-21,-22,-23,-24,32,]),'NEWLINE':([19,20,21,22,25,26,35,43,46,49,],[-21,-22,-23,-24,33,34,37,44,47,50,]),'AND':([19,20,21,22,36,],[-21,-22,-23,-24,38,]),'OR':([19,20,21,22,36,],[-21,-22,-23,-24,39,]),'LBRACKET':([27,45,],[35,46,]),'RBRACKET':([34,40,48,],[-10,43,49,]),'ELSE':([43,],[45,]),}
+_lr_action_items = {'PRINT':([0,2,3,4,5,6,13,35,36,37,40,47,50,53,],[8,8,-2,-4,-5,-6,-3,-7,-10,-11,8,-8,8,-9,]),'IF':([0,2,3,4,5,6,13,35,36,37,47,53,],[9,9,-2,-4,-5,-6,-3,-7,-10,-11,-8,-9,]),'INT':([0,2,3,4,5,6,13,35,36,37,47,53,],[10,10,-2,-4,-5,-6,-3,-7,-10,-11,-8,-9,]),'FLOAT':([0,2,3,4,5,6,13,35,36,37,47,53,],[11,11,-2,-4,-5,-6,-3,-7,-10,-11,-8,-9,]),'STR':([0,2,3,4,5,6,13,35,36,37,47,53,],[12,12,-2,-4,-5,-6,-3,-7,-10,-11,-8,-9,]),'$end':([1,2,3,4,5,6,13,35,36,37,47,53,],[0,-1,-2,-4,-5,-6,-3,-7,-10,-11,-8,-9,]),'ID':([7,10,11,12,15,16,17,30,31,32,33,34,41,42,],[14,-19,-20,-21,18,25,25,25,-15,-16,-17,-18,25,25,]),'LPAREN':([8,9,],[15,16,]),'EQUALS':([14,],[17,]),'STRING':([15,16,17,30,31,32,33,34,41,42,],[19,24,24,24,-15,-16,-17,-18,24,24,]),'NUMBER':([16,17,30,31,32,33,34,41,42,],[22,22,22,-15,-16,-17,-18,22,22,]),'FNUMBER':([16,17,30,31,32,33,34,41,42,],[23,23,23,-15,-16,-17,-18,23,23,]),'RPAREN':([18,19,20,22,23,24,25,39,44,45,],[27,28,29,-22,-23,-24,-25,-12,-13,-14,]),'GT':([21,22,23,24,25,],[31,-22,-23,-24,-25,]),'LT':([21,22,23,24,25,],[32,-22,-23,-24,-25,]),'DIF':([21,22,23,24,25,],[33,-22,-23,-24,-25,]),'MATHEQUALS':([21,22,23,24,25,],[34,-22,-23,-24,-25,]),'NEWLINE':([22,23,24,25,26,27,28,38,46,49,52,],[-22,-23,-24,-25,35,36,37,40,47,50,53,]),'AND':([22,23,24,25,39,],[-22,-23,-24,-25,41,]),'OR':([22,23,24,25,39,],[-22,-23,-24,-25,42,]),'LBRACKET':([29,48,],[38,49,]),'RBRACKET':([36,37,43,51,],[-10,-11,46,52,]),'ELSE':([46,],[48,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,13,]),'declaration':([0,2,],[4,4,]),'print_statement':([0,2,37,47,],[5,5,40,48,]),'conditional_statement':([0,2,],[6,6,]),'type':([0,2,],[7,7,]),'expression':([15,16,17,28,38,39,],[18,24,25,36,24,24,]),'condition':([16,38,39,],[23,41,42,]),'comparator':([24,],[28,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,13,]),'declaration':([0,2,],[4,4,]),'print_statement':([0,2,40,50,],[5,5,43,51,]),'conditional_statement':([0,2,],[6,6,]),'type':([0,2,],[7,7,]),'condition':([16,41,42,],[20,44,45,]),'expression':([16,17,30,41,42,],[21,26,39,21,21,]),'comparator':([21,],[30,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,16 +27,17 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> statement_list','program',1,'p_program','condicionais.py',12),
-  ('statement_list -> statement','statement_list',1,'p_statement_list','condicionais.py',16),
-  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','condicionais.py',17),
-  ('statement -> declaration','statement',1,'p_statement','condicionais.py',24),
-  ('statement -> print_statement','statement',1,'p_statement','condicionais.py',25),
-  ('statement -> conditional_statement','statement',1,'p_statement','condicionais.py',26),
-  ('declaration -> type ID EQUALS expression NEWLINE','declaration',5,'p_declaration','condicionais.py',30),
-  ('conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE','conditional_statement',9,'p_conditional_statement','condicionais.py',34),
-  ('conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE','conditional_statement',14,'p_conditional_statement','condicionais.py',35),
-  ('print_statement -> PRINT LPAREN expression RPAREN NEWLINE','print_statement',5,'p_print_statement','condicionais.py',42),
+  ('program -> statement_list','program',1,'p_program','condicionais.py',7),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','condicionais.py',11),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','condicionais.py',12),
+  ('statement -> declaration','statement',1,'p_statement','condicionais.py',19),
+  ('statement -> print_statement','statement',1,'p_statement','condicionais.py',20),
+  ('statement -> conditional_statement','statement',1,'p_statement','condicionais.py',21),
+  ('declaration -> type ID EQUALS expression NEWLINE','declaration',5,'p_declaration','condicionais.py',25),
+  ('conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET NEWLINE','conditional_statement',9,'p_conditional_statement','condicionais.py',29),
+  ('conditional_statement -> IF LPAREN condition RPAREN LBRACKET NEWLINE print_statement RBRACKET ELSE LBRACKET NEWLINE print_statement RBRACKET NEWLINE','conditional_statement',14,'p_conditional_statement','condicionais.py',30),
+  ('print_statement -> PRINT LPAREN ID RPAREN NEWLINE','print_statement',5,'p_print_statement','condicionais.py',38),
+  ('print_statement -> PRINT LPAREN STRING RPAREN NEWLINE','print_statement',5,'p_print_statement','condicionais.py',39),
   ('condition -> expression comparator expression','condition',3,'p_condition','condicionais.py',46),
   ('condition -> expression comparator expression AND condition','condition',5,'p_condition','condicionais.py',47),
   ('condition -> expression comparator expression OR condition','condition',5,'p_condition','condicionais.py',48),

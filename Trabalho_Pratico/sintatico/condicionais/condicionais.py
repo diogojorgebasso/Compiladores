@@ -35,8 +35,12 @@ def p_conditional_statement(p):
         p[0] = f"if {p[3]}:\n{indent(p[7])}else:\n{indent(p[12])}"
 
 def p_print_statement(p):
-    '''print_statement : PRINT LPAREN expression RPAREN NEWLINE'''
-    p[0] = f'print("{p[3]}")\n'
+    '''print_statement : PRINT LPAREN ID RPAREN NEWLINE
+                       | PRINT LPAREN STRING RPAREN NEWLINE'''
+    if p[3].startswith(("'", '"')):  # If it's a string literal
+        p[0] = f'print({p[3]})\n'  # Keep the quotes
+    else:  # It's an identifier
+        p[0] = f'print({p[3]})\n'  # No need to add quotes, corrected logic
     
 def p_condition(p):
     '''condition : expression comparator expression
@@ -101,5 +105,6 @@ code_to_execute = ''.join(result)
 with open('Trabalho_Pratico/sintatico/condicionais/output.txt', 'w') as file:
     file.write(code_to_execute)
 
+print("Compilado com sucesso!")
 #executando o código no próprio script    
 exec(code_to_execute)

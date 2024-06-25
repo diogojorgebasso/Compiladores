@@ -7,45 +7,43 @@ Rule 1     program -> statement_list
 Rule 2     statement_list -> statement
 Rule 3     statement_list -> statement_list statement
 Rule 4     statement -> declaration
-Rule 5     statement -> assignment
-Rule 6     statement -> print_statement
-Rule 7     declaration -> type ID EQUALS expression NEWLINE
-Rule 8     assignment -> ID EQUALS expression NEWLINE
-Rule 9     print_statement -> PRINT LPAREN expression RPAREN NEWLINE
-Rule 10    type -> INT
-Rule 11    type -> FLOAT
-Rule 12    type -> STR
-Rule 13    expression -> NUMBER
-Rule 14    expression -> FNUMBER
-Rule 15    expression -> STRING
-Rule 16    expression -> ID
+Rule 5     statement -> print_statement
+Rule 6     declaration -> type ID EQUALS expression NEWLINE
+Rule 7     print_statement -> PRINT LPAREN ID RPAREN NEWLINE
+Rule 8     print_statement -> PRINT LPAREN STRING RPAREN NEWLINE
+Rule 9     type -> INT
+Rule 10    type -> FLOAT
+Rule 11    type -> STR
+Rule 12    expression -> NUMBER
+Rule 13    expression -> FNUMBER
+Rule 14    expression -> STRING
+Rule 15    expression -> ID
 
 Terminals, with rules where they appear
 
-EQUALS               : 7 8
-FLOAT                : 11
-FNUMBER              : 14
-ID                   : 7 8 16
-INT                  : 10
-LPAREN               : 9
-NEWLINE              : 7 8 9
-NUMBER               : 13
-PRINT                : 9
-RPAREN               : 9
-STR                  : 12
-STRING               : 15
+EQUALS               : 6
+FLOAT                : 10
+FNUMBER              : 13
+ID                   : 6 7 15
+INT                  : 9
+LPAREN               : 7 8
+NEWLINE              : 6 7 8
+NUMBER               : 12
+PRINT                : 7 8
+RPAREN               : 7 8
+STR                  : 11
+STRING               : 8 14
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment           : 5
 declaration          : 4
-expression           : 7 8 9
-print_statement      : 6
+expression           : 6
+print_statement      : 5
 program              : 0
 statement            : 2 3
 statement_list       : 1 3
-type                 : 7
+type                 : 6
 
 Parsing method: LALR
 
@@ -56,28 +54,25 @@ state 0
     (2) statement_list -> . statement
     (3) statement_list -> . statement_list statement
     (4) statement -> . declaration
-    (5) statement -> . assignment
-    (6) statement -> . print_statement
-    (7) declaration -> . type ID EQUALS expression NEWLINE
-    (8) assignment -> . ID EQUALS expression NEWLINE
-    (9) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
-    (10) type -> . INT
-    (11) type -> . FLOAT
-    (12) type -> . STR
+    (5) statement -> . print_statement
+    (6) declaration -> . type ID EQUALS expression NEWLINE
+    (7) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (8) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
+    (9) type -> . INT
+    (10) type -> . FLOAT
+    (11) type -> . STR
 
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    INT             shift and go to state 10
-    FLOAT           shift and go to state 11
-    STR             shift and go to state 12
+    PRINT           shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+    STR             shift and go to state 10
 
     program                        shift and go to state 1
     statement_list                 shift and go to state 2
     statement                      shift and go to state 3
     declaration                    shift and go to state 4
-    assignment                     shift and go to state 5
-    print_statement                shift and go to state 6
-    type                           shift and go to state 7
+    print_statement                shift and go to state 5
+    type                           shift and go to state 6
 
 state 1
 
@@ -90,33 +85,29 @@ state 2
     (1) program -> statement_list .
     (3) statement_list -> statement_list . statement
     (4) statement -> . declaration
-    (5) statement -> . assignment
-    (6) statement -> . print_statement
-    (7) declaration -> . type ID EQUALS expression NEWLINE
-    (8) assignment -> . ID EQUALS expression NEWLINE
-    (9) print_statement -> . PRINT LPAREN expression RPAREN NEWLINE
-    (10) type -> . INT
-    (11) type -> . FLOAT
-    (12) type -> . STR
+    (5) statement -> . print_statement
+    (6) declaration -> . type ID EQUALS expression NEWLINE
+    (7) print_statement -> . PRINT LPAREN ID RPAREN NEWLINE
+    (8) print_statement -> . PRINT LPAREN STRING RPAREN NEWLINE
+    (9) type -> . INT
+    (10) type -> . FLOAT
+    (11) type -> . STR
 
     $end            reduce using rule 1 (program -> statement_list .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    INT             shift and go to state 10
-    FLOAT           shift and go to state 11
-    STR             shift and go to state 12
+    PRINT           shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+    STR             shift and go to state 10
 
-    statement                      shift and go to state 13
+    statement                      shift and go to state 11
     declaration                    shift and go to state 4
-    assignment                     shift and go to state 5
-    print_statement                shift and go to state 6
-    type                           shift and go to state 7
+    print_statement                shift and go to state 5
+    type                           shift and go to state 6
 
 state 3
 
     (2) statement_list -> statement .
 
-    ID              reduce using rule 2 (statement_list -> statement .)
     PRINT           reduce using rule 2 (statement_list -> statement .)
     INT             reduce using rule 2 (statement_list -> statement .)
     FLOAT           reduce using rule 2 (statement_list -> statement .)
@@ -128,7 +119,6 @@ state 4
 
     (4) statement -> declaration .
 
-    ID              reduce using rule 4 (statement -> declaration .)
     PRINT           reduce using rule 4 (statement -> declaration .)
     INT             reduce using rule 4 (statement -> declaration .)
     FLOAT           reduce using rule 4 (statement -> declaration .)
@@ -138,75 +128,55 @@ state 4
 
 state 5
 
-    (5) statement -> assignment .
+    (5) statement -> print_statement .
 
-    ID              reduce using rule 5 (statement -> assignment .)
-    PRINT           reduce using rule 5 (statement -> assignment .)
-    INT             reduce using rule 5 (statement -> assignment .)
-    FLOAT           reduce using rule 5 (statement -> assignment .)
-    STR             reduce using rule 5 (statement -> assignment .)
-    $end            reduce using rule 5 (statement -> assignment .)
+    PRINT           reduce using rule 5 (statement -> print_statement .)
+    INT             reduce using rule 5 (statement -> print_statement .)
+    FLOAT           reduce using rule 5 (statement -> print_statement .)
+    STR             reduce using rule 5 (statement -> print_statement .)
+    $end            reduce using rule 5 (statement -> print_statement .)
 
 
 state 6
 
-    (6) statement -> print_statement .
+    (6) declaration -> type . ID EQUALS expression NEWLINE
 
-    ID              reduce using rule 6 (statement -> print_statement .)
-    PRINT           reduce using rule 6 (statement -> print_statement .)
-    INT             reduce using rule 6 (statement -> print_statement .)
-    FLOAT           reduce using rule 6 (statement -> print_statement .)
-    STR             reduce using rule 6 (statement -> print_statement .)
-    $end            reduce using rule 6 (statement -> print_statement .)
+    ID              shift and go to state 12
 
 
 state 7
 
-    (7) declaration -> type . ID EQUALS expression NEWLINE
+    (7) print_statement -> PRINT . LPAREN ID RPAREN NEWLINE
+    (8) print_statement -> PRINT . LPAREN STRING RPAREN NEWLINE
 
-    ID              shift and go to state 14
+    LPAREN          shift and go to state 13
 
 
 state 8
 
-    (8) assignment -> ID . EQUALS expression NEWLINE
+    (9) type -> INT .
 
-    EQUALS          shift and go to state 15
+    ID              reduce using rule 9 (type -> INT .)
 
 
 state 9
 
-    (9) print_statement -> PRINT . LPAREN expression RPAREN NEWLINE
+    (10) type -> FLOAT .
 
-    LPAREN          shift and go to state 16
+    ID              reduce using rule 10 (type -> FLOAT .)
 
 
 state 10
 
-    (10) type -> INT .
+    (11) type -> STR .
 
-    ID              reduce using rule 10 (type -> INT .)
+    ID              reduce using rule 11 (type -> STR .)
 
 
 state 11
 
-    (11) type -> FLOAT .
-
-    ID              reduce using rule 11 (type -> FLOAT .)
-
-
-state 12
-
-    (12) type -> STR .
-
-    ID              reduce using rule 12 (type -> STR .)
-
-
-state 13
-
     (3) statement_list -> statement_list statement .
 
-    ID              reduce using rule 3 (statement_list -> statement_list statement .)
     PRINT           reduce using rule 3 (statement_list -> statement_list statement .)
     INT             reduce using rule 3 (statement_list -> statement_list statement .)
     FLOAT           reduce using rule 3 (statement_list -> statement_list statement .)
@@ -214,150 +184,129 @@ state 13
     $end            reduce using rule 3 (statement_list -> statement_list statement .)
 
 
+state 12
+
+    (6) declaration -> type ID . EQUALS expression NEWLINE
+
+    EQUALS          shift and go to state 14
+
+
+state 13
+
+    (7) print_statement -> PRINT LPAREN . ID RPAREN NEWLINE
+    (8) print_statement -> PRINT LPAREN . STRING RPAREN NEWLINE
+
+    ID              shift and go to state 15
+    STRING          shift and go to state 16
+
+
 state 14
 
-    (7) declaration -> type ID . EQUALS expression NEWLINE
+    (6) declaration -> type ID EQUALS . expression NEWLINE
+    (12) expression -> . NUMBER
+    (13) expression -> . FNUMBER
+    (14) expression -> . STRING
+    (15) expression -> . ID
 
-    EQUALS          shift and go to state 17
+    NUMBER          shift and go to state 19
+    FNUMBER         shift and go to state 20
+    STRING          shift and go to state 21
+    ID              shift and go to state 17
 
+    expression                     shift and go to state 18
 
 state 15
 
-    (8) assignment -> ID EQUALS . expression NEWLINE
-    (13) expression -> . NUMBER
-    (14) expression -> . FNUMBER
-    (15) expression -> . STRING
-    (16) expression -> . ID
+    (7) print_statement -> PRINT LPAREN ID . RPAREN NEWLINE
 
-    NUMBER          shift and go to state 20
-    FNUMBER         shift and go to state 21
-    STRING          shift and go to state 22
-    ID              shift and go to state 18
+    RPAREN          shift and go to state 22
 
-    expression                     shift and go to state 19
 
 state 16
 
-    (9) print_statement -> PRINT LPAREN . expression RPAREN NEWLINE
-    (13) expression -> . NUMBER
-    (14) expression -> . FNUMBER
-    (15) expression -> . STRING
-    (16) expression -> . ID
+    (8) print_statement -> PRINT LPAREN STRING . RPAREN NEWLINE
 
-    NUMBER          shift and go to state 20
-    FNUMBER         shift and go to state 21
-    STRING          shift and go to state 22
-    ID              shift and go to state 18
+    RPAREN          shift and go to state 23
 
-    expression                     shift and go to state 23
 
 state 17
 
-    (7) declaration -> type ID EQUALS . expression NEWLINE
-    (13) expression -> . NUMBER
-    (14) expression -> . FNUMBER
-    (15) expression -> . STRING
-    (16) expression -> . ID
+    (15) expression -> ID .
 
-    NUMBER          shift and go to state 20
-    FNUMBER         shift and go to state 21
-    STRING          shift and go to state 22
-    ID              shift and go to state 18
+    NEWLINE         reduce using rule 15 (expression -> ID .)
 
-    expression                     shift and go to state 24
 
 state 18
 
-    (16) expression -> ID .
+    (6) declaration -> type ID EQUALS expression . NEWLINE
 
-    NEWLINE         reduce using rule 16 (expression -> ID .)
-    RPAREN          reduce using rule 16 (expression -> ID .)
+    NEWLINE         shift and go to state 24
 
 
 state 19
 
-    (8) assignment -> ID EQUALS expression . NEWLINE
+    (12) expression -> NUMBER .
 
-    NEWLINE         shift and go to state 25
+    NEWLINE         reduce using rule 12 (expression -> NUMBER .)
 
 
 state 20
 
-    (13) expression -> NUMBER .
+    (13) expression -> FNUMBER .
 
-    NEWLINE         reduce using rule 13 (expression -> NUMBER .)
-    RPAREN          reduce using rule 13 (expression -> NUMBER .)
+    NEWLINE         reduce using rule 13 (expression -> FNUMBER .)
 
 
 state 21
 
-    (14) expression -> FNUMBER .
+    (14) expression -> STRING .
 
-    NEWLINE         reduce using rule 14 (expression -> FNUMBER .)
-    RPAREN          reduce using rule 14 (expression -> FNUMBER .)
+    NEWLINE         reduce using rule 14 (expression -> STRING .)
 
 
 state 22
 
-    (15) expression -> STRING .
+    (7) print_statement -> PRINT LPAREN ID RPAREN . NEWLINE
 
-    NEWLINE         reduce using rule 15 (expression -> STRING .)
-    RPAREN          reduce using rule 15 (expression -> STRING .)
+    NEWLINE         shift and go to state 25
 
 
 state 23
 
-    (9) print_statement -> PRINT LPAREN expression . RPAREN NEWLINE
+    (8) print_statement -> PRINT LPAREN STRING RPAREN . NEWLINE
 
-    RPAREN          shift and go to state 26
+    NEWLINE         shift and go to state 26
 
 
 state 24
 
-    (7) declaration -> type ID EQUALS expression . NEWLINE
+    (6) declaration -> type ID EQUALS expression NEWLINE .
 
-    NEWLINE         shift and go to state 27
+    PRINT           reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
+    INT             reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
+    FLOAT           reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
+    STR             reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
+    $end            reduce using rule 6 (declaration -> type ID EQUALS expression NEWLINE .)
 
 
 state 25
 
-    (8) assignment -> ID EQUALS expression NEWLINE .
+    (7) print_statement -> PRINT LPAREN ID RPAREN NEWLINE .
 
-    ID              reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
-    PRINT           reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
-    INT             reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
-    FLOAT           reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
-    STR             reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
-    $end            reduce using rule 8 (assignment -> ID EQUALS expression NEWLINE .)
+    PRINT           reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    INT             reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    FLOAT           reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    STR             reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
+    $end            reduce using rule 7 (print_statement -> PRINT LPAREN ID RPAREN NEWLINE .)
 
 
 state 26
 
-    (9) print_statement -> PRINT LPAREN expression RPAREN . NEWLINE
+    (8) print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .
 
-    NEWLINE         shift and go to state 28
-
-
-state 27
-
-    (7) declaration -> type ID EQUALS expression NEWLINE .
-
-    ID              reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-    PRINT           reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-    INT             reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-    FLOAT           reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-    STR             reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-    $end            reduce using rule 7 (declaration -> type ID EQUALS expression NEWLINE .)
-
-
-state 28
-
-    (9) print_statement -> PRINT LPAREN expression RPAREN NEWLINE .
-
-    ID              reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    PRINT           reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    INT             reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    FLOAT           reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    STR             reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
-    $end            reduce using rule 9 (print_statement -> PRINT LPAREN expression RPAREN NEWLINE .)
+    PRINT           reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    INT             reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    FLOAT           reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    STR             reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
+    $end            reduce using rule 8 (print_statement -> PRINT LPAREN STRING RPAREN NEWLINE .)
 

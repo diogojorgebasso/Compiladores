@@ -75,7 +75,7 @@ def t_FNUMBER(t):
 
 def t_STRING(t):
     r'\".*?\"|\'.*?\''
-    t.value = str(t.value[1:-1])  # remove single quotes
+    t.value = str(t.value)  
     return t
 
 def t_ELSE(t):

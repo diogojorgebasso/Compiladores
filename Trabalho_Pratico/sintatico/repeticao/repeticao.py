@@ -16,7 +16,7 @@ def p_statement_list(p):
     if len(p) == 2:
         p[0] = [p[1]]
     else:
-        p[0] = list(p[1])+ [p[2]]
+        p[0] = p[1] + [p[2]]
 
 def p_statement(p):
     '''statement : for_statement
@@ -77,8 +77,16 @@ def p_while_statement(p):
     p[0] = ('while', p[3], p[6])
 
 def p_print_statement(p):
-    '''print_statement : PRINT LPAREN expression RPAREN NEWLINE'''
+    '''print_statement : PRINT LPAREN ID RPAREN NEWLINE
+                       | PRINT LPAREN STRING RPAREN NEWLINE'''
     p[0] = ('print', p[3])
+
+def indent(code_block, level=1):
+    indentation = '    '  # 4 spaces
+    if isinstance(code_block, list):
+        code_block = "\n".join(code_block)
+    indented_code = ''.join(f"{indentation*level}{line}\n" for line in code_block.splitlines())
+    return indented_code
 
 # Error rule for syntax errors
 def p_error(p):
